@@ -1,4 +1,4 @@
-package simplonline;
+package com.koala.platform.Entities;
 
 import jakarta.persistence.*;
 
@@ -25,7 +25,7 @@ public class PromotionEntity {
     @OneToMany(mappedBy = "promotionByIdp")
     private Collection<BriefEntity> briefsById;
     @ManyToOne
-    @JoinColumn(name = "idf", referencedColumnName = "id",insertable = false,updatable = false)
+    @JoinColumns({@JoinColumn(name = "idf", referencedColumnName = "id", insertable = false, updatable = false), @JoinColumn(name = "idf", referencedColumnName = "id")})
     private FormateurEntity formateurByIdf;
 
     public Long getId() {

@@ -1,12 +1,10 @@
-package simplonline;
+package com.koala.platform.Entities;
 
 import jakarta.persistence.*;
 
-import java.util.Collection;
-
 @Entity
-@Table(name = "formateur", schema = "public", catalog = "simplone")
-public class FormateurEntity {
+@Table(name = "apprenant", schema = "public", catalog = "simplone")
+public class ApprenantEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     @Column(name = "id")
@@ -26,8 +24,12 @@ public class FormateurEntity {
     @Basic
     @Column(name = "email")
     private String email;
-    @OneToMany(mappedBy = "formateurByIdf")
-    private Collection<PromotionEntity> promotionsById;
+    @Basic
+    @Column(name = "idp")
+    private Long idp;
+    @ManyToOne
+    @JoinColumns({@JoinColumn(name = "idp", referencedColumnName = "id", insertable = false, updatable = false), @JoinColumn(name = "idp", referencedColumnName = "id")})
+    private PromotionEntity promotionByIdp;
 
     public Long getId() {
         return id;
@@ -77,12 +79,20 @@ public class FormateurEntity {
         this.email = email;
     }
 
+    public Long getIdp() {
+        return idp;
+    }
+
+    public void setIdp(Long idp) {
+        this.idp = idp;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        FormateurEntity that = (FormateurEntity) o;
+        ApprenantEntity that = (ApprenantEntity) o;
 
         if (id != null ? !id.equals(that.id) : that.id != null) return false;
         if (username != null ? !username.equals(that.username) : that.username != null) return false;
@@ -90,6 +100,7 @@ public class FormateurEntity {
         if (fullname != null ? !fullname.equals(that.fullname) : that.fullname != null) return false;
         if (status != null ? !status.equals(that.status) : that.status != null) return false;
         if (email != null ? !email.equals(that.email) : that.email != null) return false;
+        if (idp != null ? !idp.equals(that.idp) : that.idp != null) return false;
 
         return true;
     }
@@ -102,14 +113,15 @@ public class FormateurEntity {
         result = 31 * result + (fullname != null ? fullname.hashCode() : 0);
         result = 31 * result + (status != null ? status.hashCode() : 0);
         result = 31 * result + (email != null ? email.hashCode() : 0);
+        result = 31 * result + (idp != null ? idp.hashCode() : 0);
         return result;
     }
 
-    public Collection<PromotionEntity> getPromotionsById() {
-        return promotionsById;
+    public PromotionEntity getPromotionByIdp() {
+        return promotionByIdp;
     }
 
-    public void setPromotionsById(Collection<PromotionEntity> promotionsById) {
-        this.promotionsById = promotionsById;
+    public void setPromotionByIdp(PromotionEntity promotionByIdp) {
+        this.promotionByIdp = promotionByIdp;
     }
 }

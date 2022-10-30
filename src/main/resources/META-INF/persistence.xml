@@ -5,5 +5,20 @@
              version="3.0">
     <persistence-unit name="default">
 
+        <class>com.koala.platform.Entities.AdminEntity</class>
+        <class>com.koala.platform.Entities.ApprenantEntity</class>
+        <class>com.koala.platform.Entities.BriefEntity</class>
+        <class>com.koala.platform.Entities.FormateurEntity</class>
+        <class>com.koala.platform.Entities.PromotionEntity</class>
+        <properties>
+            <property name="hibernate.connection.url"
+                      value="jdbc:postgresql://free-tier7.aws-eu-west-1.cockroachlabs.cloud:26257/simplone?options=--cluster%3Dkoala-rifa-3608&amp;sslmode=verify-full"/>
+            <property name="hibernate.connection.driver_class" value="org.postgresql.Driver"/>
+            <property name="hibernate.connection.username" value="Koala"/>
+            <property name="hibernate.connection.password" value="v5WpiXejAS2PQKGDCsQxLg"/>
+            <property name="hibernate.show_sql" value="true"/>
+
+        </properties>
     </persistence-unit>
+
 </persistence>

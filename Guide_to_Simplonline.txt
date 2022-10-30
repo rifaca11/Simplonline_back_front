@@ -1,0 +1,73 @@
+After install all ressources Hibernate 
+start your project by choose pom.xml
+and click Alt+insert to isnert dependencies
+then add PostgreSQL JDBC Driver,then click refresh maven (ctrl+shift+O)
+next step : create database and connect its in intelij
+then create table admin :
+CREATE TABLE admin (
+    id SERIAL primary key NOT NULL,
+    username varchar(255) NOT NULL,
+    password varchar(255) NOT NULL,
+    email varchar(255) NOT NULL
+    )
+then insert row in table admin :
+INSERT INTO admin (username, password, email) VALUES
+('admin', 'admin', 'admin@gmail.com'); 
+
+then create table apprenant:
+CREATE TABLE apprenant (
+    id SERIAL primary key NOT NULL,
+    username varchar(255) NOT NULL,
+    password varchar(255) NOT NULL,
+    fullName varchar(255) NOT NULL,
+    status int NOT NULL DEFAULT 0,
+    email varchar(200) NOT NULL,
+    idP int DEFAULT NULL
+    )
+
+then create table brief:
+CREATE TABLE brief (
+    id SERIAL primary key NOT NULL,
+    context varchar(255) NOT NULL,
+    deadline int NOT NULL,
+    idP int DEFAULT NULL
+    )
+
+then create table promotion
+CREATE TABLE promotion (
+    id SERIAL primary key NOT NULL,
+    name varchar(255) NOT NULL,
+    status int NOT NULL DEFAULT 0,
+    idF int DEFAULT NULL
+    )
+ last table :
+CREATE TABLE formateur (
+    id serial primary key NOT NULL,
+    username varchar(255) NOT NULL,
+    password varchar(255) NOT NULL,
+    fullName varchar(255) NOT NULL,
+    status int NOT NULL DEFAULT 0,
+    email varchar(200) NOT NULL
+    )
+
+then add foreign key to table apprenant
+ALTER TABLE apprenant
+  ADD CONSTRAINT idP FOREIGN KEY (idP) REFERENCES promotion (id)
+ ON DELETE CASCADE ON UPDATE CASCADE;
+
+then add fk in table brief : 
+ALTER TABLE brief
+ADD CONSTRAINT brief_ibfk_1 FOREIGN KEY (idP) REFERENCES promotion (id) 
+ON DELETE CASCADE ON UPDATE CASCADE;
+
+then add fk into table promotion 
+ALTER TABLE promotion
+  ADD CONSTRAINT idF FOREIGN KEY (idF) REFERENCES formateur (id)
+ ON DELETE CASCADE ON UPDATE CASCADE;
+
+next step : generate entities from db
+go to view>windows tool>persistannce
+then right click on persistence.xml 
+select generate persistence mapping 
+then choose "by db schema"
+add in persistence.xml your hibernate connection 
