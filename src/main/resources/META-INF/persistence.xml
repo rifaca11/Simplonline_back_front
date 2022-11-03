@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<persistence xmlns="https://jakarta.ee/xml/ns/persistence"
+             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xsi:schemaLocation="https://jakarta.ee/xml/ns/persistence https://jakarta.ee/xml/ns/persistence/persistence_3_0.xsd"
+             version="3.0">
+    <persistence-unit name="default">
+        <class>com.example.simpkoala.entity.Admin</class>
+        <class>com.example.simpkoala.entity.Apprenant</class>
+        <class>com.example.simpkoala.entity.Brief</class>
+        <class>com.example.simpkoala.entity.Formateur</class>
+        <class>com.example.simpkoala.entity.Promos</class>
+        <class>com.example.simpkoala.entity.Promostoapprenant</class>
+        <properties>
+            <property name="hibernate.connection.url" value="jdbc:mysql://172.20.236.129:3306/koalasimp"/>
+            <property name="hibernate.connection.driver_class" value="com.mysql.cj.jdbc.Driver"/>
+            <property name="hibernate.connection.username" value="root"/>
+            <property name="hibernate.connection.password" value="root"/>
+            <property name="hibernate.show_sql" value="true"/>
+            <property name="hibernate.hbm2ddl.auto" value="update"/>
+        </properties>
+    </persistence-unit>
+</persistence>

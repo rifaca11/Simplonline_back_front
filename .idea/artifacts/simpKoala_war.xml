@@ -1,0 +1,14 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="simpKoala:war">
+    <output-path>$PROJECT_DIR$/target</output-path>
+    <properties id="maven-jee-properties">
+      <options>
+        <module>simpKoala</module>
+        <packaging>war</packaging>
+      </options>
+    </properties>
+    <root id="archive" name="simpKoala-1.0-SNAPSHOT.war">
+      <element id="artifact" artifact-name="simpKoala:war exploded" />
+    </root>
+  </artifact>
+</component>
