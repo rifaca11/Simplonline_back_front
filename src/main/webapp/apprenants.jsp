@@ -1,5 +1,7 @@
 <%@ page import="com.example.simpkoala.entity.Apprenant" %>
 <%@ page import="java.util.List" %>
+<%@ page import="com.example.simpkoala.entity.Promos" %>
+<%@ page import="java.util.stream.Collectors" %>
 
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%--<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>--%>
@@ -68,7 +70,7 @@
 <%--</form>--%>
 
 <jsp:include page="sidebar.jsp"/>
-<!-- Client Table -->
+<!-- Apprenant Table -->
 
 <div class="mt-4 mx-4">
     <div class="w-full overflow-hidden rounded-lg shadow-xs">
@@ -98,7 +100,7 @@
                         </div>
                     </td>
                     <td class="px-4 py-3 text-sm"><%=apprenant.getEmail()%></td>
-                    <td class="px-4 py-3 text-sm"><%=apprenant.getPromosByPromoId()%></td>
+                    <td class="px-4 py-3 text-sm"><%=String.join(", ", apprenant.getPromosByPromoId().stream().map(Promos::getName).toList())%></td>
                     <td class="px-4 py-3 text-xs">
                         <a href="#"><span class="px-2 py-1 font-semibold leading-tight text-green-700 bg-green-100 rounded-full white:bg-green-700 white:text-green-100"> Edit </span></a>
                         <a href="#"><span class="px-2 py-1 font-semibold leading-tight text-red-700 bg-red-100 rounded-full white:bg-red-700 white:text-red-100"> Delete </span></a>
@@ -113,6 +115,7 @@
     </div>
 </div>
 
-<!-- ./Client Table -->
+<!-- ./Apprenant Table -->
+<jsp:include page="footer.jsp"/>
 </body>
 </html>

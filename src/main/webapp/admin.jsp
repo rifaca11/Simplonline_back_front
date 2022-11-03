@@ -15,7 +15,7 @@
 </head>
 <body>
     <h2>Promos</h2>
-    <h2><a href="addPromo.jsp"/> Add Promo</h2>
+    <h2><a href="promo.jsp"/> Add Promo</h2>
 
     <table>
         <thead>

@@ -2,7 +2,6 @@ package com.example.simpkoala.services;
 
 import com.example.simpkoala.config.Config;
 import com.example.simpkoala.entity.Apprenant;
-import com.example.simpkoala.entity.Promostoapprenant;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.TypedQuery;
 
@@ -83,7 +82,7 @@ public class ApprenantService {
 
 
 //            List<Apprenant> list = query.getResultList();
-            List<Apprenant> list = em.createQuery("select a FROM Apprenant a, Promostoapprenant p where a.id = p.apprenantId").getResultList();
+            List<Apprenant> list = em.createQuery("select a FROM Apprenant a", Apprenant.class).getResultList();
             em.getTransaction().commit();
             return list;
         }catch(Exception e)
