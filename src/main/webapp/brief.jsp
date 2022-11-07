@@ -25,52 +25,92 @@
 </head>
 <body>
 <jsp:include page="sidebar.jsp"/>
-<!-- Apprenant Table -->
+<!-- Brief Table -->
 
-<div class="mt-4 mx-4">
-    <div class="w-full overflow-hidden rounded-lg shadow-xs">
-        <div class="w-full overflow-x-auto">
-            <table class="w-full">
-                <thead>
-                <tr class="text-xs font-semibold tracking-wide text-left text-gray-500 uppercase border-b white:border-gray-700 bg-gray-50 white:text-gray-400 white:bg-gray-800">
-                    <th class="px-14 py-3">Description</th>
-                    <th class="px-4 py-3">Brief</th>
-                    <th class="px-4 py-3">Promo</th>
-                    <th class="px-4 py-3">Actions</th>
-                </tr>
-                </thead>
-                <tbody class="bg-white divide-y white:divide-gray-700 white:bg-gray-800">
-                <% List<Brief> briefList = (List<Brief>) request.getAttribute("data");
-                    for(Brief brief : briefList) {
-                %>
-                <tr class="bg-gray-50 white:bg-gray-800 hover:bg-gray-100 white:hover:bg-gray-900 text-gray-700 white:text-gray-400">
-                    <td class="px-4 py-3">
-                        <div class="flex items-center text-sm">
-                            <div class="relative hidden w-8 h-8 mr-3 rounded-full md:block">
-                                <div class="absolute inset-0 rounded-full shadow-inner" aria-hidden="true"></div>
-                            </div>
-                            <div>
-                                <p class="font-semibold"><%=brief.getDescription()%></p>
-                            </div>
-                        </div>
-                    </td>
-                    <td class="px-4 py-3 text-sm"><%=brief.getName()%></td>
-                    <td class="px-4 py-3 text-sm"><%=brief.getPromosByPromoId().getName()%></td>
-                    <td class="px-4 py-3 text-xs">
-                        <a href="#"><span class="px-2 py-1 font-semibold leading-tight text-green-700 bg-green-100 rounded-full white:bg-green-700 white:text-green-100"> Edit </span></a>
-                        <a href="#"><span class="px-2 py-1 font-semibold leading-tight text-red-700 bg-red-100 rounded-full white:bg-red-700 white:text-red-100"> Delete </span></a>
-                    </td>
 
-                </tr>
-                <% } %>
-                </tbody>
-            </table>
+<div class="container mx-auto px-4 sm:px-8">
+    <div class="py-8">
+        <div>
+            <h2 class="text-2xl font-semibold leading-tight mb-6">Briefs</h2>
         </div>
 
+        <div class="my-2 flex sm:flex-row flex-col">
+
+        </div>
+        <div class="-mx-4 sm:-mx-8 px-4 sm:px-8 py-4 overflow-x-auto">
+            <div class="inline-block min-w-full shadow rounded-lg overflow-hidden">
+                <table class="min-w-full leading-normal">
+                    <thead>
+                    <tr>
+                        <th
+                                class="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
+                            Description
+                        </th>
+                        <th
+                                class="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
+                            Brief
+                        </th>
+                        <th
+                                class="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
+                            Promo
+                        </th>
+                        <th
+                                class="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
+                            Actions
+                        </th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <% List<Brief> briefList = (List<Brief>) request.getAttribute("data");
+                        for(Brief brief : briefList) {
+                    %>
+                    <tr>
+                        <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
+                            <div class="flex items-center">
+
+                                <div class="ml-3">
+                                    <p class="text-gray-900 whitespace-no-wrap">
+                                        <%=brief.getDescription()%>
+                                    </p>
+                                </div>
+                            </div>
+                        </td>
+                        <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
+                            <p class="text-gray-900 whitespace-no-wrap"><%=brief.getName()%></p>
+                        </td>
+                        <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
+                            <p class="text-gray-900 whitespace-no-wrap">
+                                <%=brief.getPromosByPromoId().getName()%>                            </p>
+                        </td>
+
+                        <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm flex ">
+                            <form action="BriefServlet" method="post">
+                                <input type="hidden" name="id" value="<%=brief.getId()%>"/>
+                                <input type="hidden" name="action" value="delete"/>
+                                <button type="submit">
+                                    <span class="px-2 py-1 font-semibold leading-tight text-red-700 bg-red-100 rounded-full white:bg-red-700 white:text-red-100"> Delete </span>
+                                </button>
+                            </form>
+                            <form action="BriefServlet" method="post">
+                                <input type="hidden" name="id" value="<%=brief.getId()%>"/>
+                                <input type="hidden" name="action" value="update"/>
+                                <button type="submit">
+                                    <span class="ml-4 px-2 py-1 font-semibold leading-tight text-green-700 bg-green-100 rounded-full white:bg-green-700 white:text-green-100"> Update </span>
+                                </button>
+                            </form>
+                        </td>
+                    </tr>
+                    </tbody>
+                    <% } %>
+                </table>
+
+            </div>
+        </div>
     </div>
 </div>
 
-<!-- ./Apprenant Table -->
+
+<!-- ./Brief Table -->
 <jsp:include page="footer.jsp"/>
 </body>
 </html>

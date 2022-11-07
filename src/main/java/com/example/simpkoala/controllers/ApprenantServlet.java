@@ -24,7 +24,7 @@ public class ApprenantServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         if(request.getParameter("action") !=null){
-            if (request.getParameter("action").equals("add")){
+            if (request.getParameter("action").equals("addApprenant")){
                     String firstname = request.getParameter("firstname");
                     String lastname = request.getParameter("lastname");
                     String email = request.getParameter("email");

@@ -1,8 +1,7 @@
 package com.example.simpkoala.controllers;
 
-import com.example.simpkoala.entity.Apprenant;
 import com.example.simpkoala.entity.Formateur;
-import com.example.simpkoala.services.ApprenantService;
+
 import com.example.simpkoala.services.FormateurService;
 import jakarta.servlet.*;
 import jakarta.servlet.http.*;
@@ -17,7 +16,7 @@ public class FormateurServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         FormateurService formateurService = new FormateurService();
         List<Formateur> formateurList = formateurService.getAll();
-        request.setAttribute("formateurList",formateurList);
+        request.setAttribute("data",formateurList);
         request.getRequestDispatcher("formateur.jsp").forward(request,response);
 
     }

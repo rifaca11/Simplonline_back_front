@@ -1,8 +1,8 @@
 package com.example.simpkoala.controllers;
 
-import com.example.simpkoala.entity.Apprenant;
 import com.example.simpkoala.entity.Promos;
-import com.example.simpkoala.services.ApprenantService;
+import com.example.simpkoala.entity.Promos;
+import com.example.simpkoala.services.PromosService;
 import com.example.simpkoala.services.PromosService;
 import jakarta.servlet.*;
 import jakarta.servlet.http.*;
@@ -25,29 +25,23 @@ public class PromoServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-//        if(request.getParameter("action") !=null){
-//            if (request.getParameter("action").equals("add")){
-//                String firstname = request.getParameter("firstname");
-//                String lastname = request.getParameter("lastname");
-//                String email = request.getParameter("email");
-//                String password = request.getParameter("password");
-//
-//                Apprenant newApprenant = new Apprenant();
-//                newApprenant.setFirstname(firstname);
-//                newApprenant.setLastname(lastname);
-//                newApprenant.setEmail(email);
-//                newApprenant.setPassword(password);
-//
-//                ApprenantService apprenantService = new ApprenantService();
-//                apprenantService.add(newApprenant);
-//                response.sendRedirect("ApprenantServlet");
-//
-//            } else if (request.getParameter("action").equals("delete")) {
-//                ApprenantService apprenantService = new ApprenantService();
-//                apprenantService.deleteByID(Integer.parseInt(request.getParameter("id")));
-//                response.sendRedirect("ApprenantServlet");
-//            }
-//        }
+        if(request.getParameter("action") !=null){
+            if (request.getParameter("action").equals("add")){
+                String name = request.getParameter("name");
+
+                Promos newPromos = new Promos();
+                newPromos.setName(name);
+
+                PromosService promosService = new PromosService();
+                promosService.add(newPromos);
+                response.sendRedirect("PromoServlet");
+
+            } else if (request.getParameter("action").equals("delete")) {
+                PromosService promosService = new PromosService();
+                promosService.deleteByID(Integer.parseInt(request.getParameter("id")));
+                response.sendRedirect("PromoServlet");
+            }
+        }
 
 
 
