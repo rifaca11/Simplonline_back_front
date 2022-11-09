@@ -1,4 +1,5 @@
-<%@ page import="com.example.simpkoala.entity.Admin" %><%--
+<%@ page import="com.example.simpkoala.entity.Admin" %>
+<%@ page import="java.util.List" %><%--
   Created by IntelliJ IDEA.
   User: youcode
   Date: 11/3/2022
@@ -21,29 +22,29 @@
 
     <!-- Card body -->
     <div class="bg-white px-8 pb-6 rounded-b shadow-lg">
-        <h2 class="text-2xl font-semibold leading-tight py-2 mb-6">Add your student </h2>
+        <h2 class="text-2xl font-semibold leading-tight py-2 mb-6">Admin profile </h2>
 
         <!-- Card form -->
         <div x-show="card">
             <form action="AdminServlet" method="post">
                 <% List<Admin> admin = (List<Admin>) request.getAttribute("data");
-                    for(Admin admin : admin) {
+                    for(Admin admins : admin) {
                 %>
                 <div class="space-y-4">
                     <!-- infos -->
                     <div>
                         <label class="block text-sm font-medium mb-1" for="firstname">First name <span class="text-red-500">*</span></label>
-                        <input name="firstname" id="firstname" class="text-sm text-gray-800 bg-white border rounded leading-5 py-2 px-3 border-gray-200 hover:border-gray-300 focus:border-red-300 shadow-sm placeholder-gray-400 focus:ring-0 w-full" readonly="readonly" type="text" value="<%=admin.getFirstname()%>" />
+                        <input name="firstname" id="firstname" class="text-sm text-gray-800 bg-white border rounded leading-5 py-2 px-3 border-gray-200 hover:border-gray-300 focus:border-red-300 shadow-sm placeholder-gray-400 focus:ring-0 w-full" readonly="readonly" type="text" value="<%=admins.getFirstname()%>" />
                     </div>
                     <div>
                         <label class="block text-sm font-medium mb-1" for="lastname">Last name <span class="text-red-500">*</span></label>
-                        <input name="lastname" id="lastname" class="text-sm text-gray-800 bg-white border rounded leading-5 py-2 px-3 border-gray-200 hover:border-gray-300 focus:border-red-300 shadow-sm placeholder-gray-400 focus:ring-0 w-full" readonly="readonly" type="text" value="<%=admin.getLastname()%>"/>
+                        <input name="lastname" id="lastname" class="text-sm text-gray-800 bg-white border rounded leading-5 py-2 px-3 border-gray-200 hover:border-gray-300 focus:border-red-300 shadow-sm placeholder-gray-400 focus:ring-0 w-full" readonly="readonly" type="text" value="<%=admins.getLastname()%>"/>
                     </div>
                     <!-- Mail and password -->
                     <div class="flex space-x-4">
                         <div class="flex-1">
                             <label class="block text-sm font-medium mb-1" for="email">Email <span class="text-red-500">*</span></label>
-                            <input name="email" id="email" class="text-sm text-gray-800 bg-white border rounded leading-5 py-2 px-3 border-gray-200 hover:border-gray-300 focus:border-red-300 shadow-sm placeholder-gray-400 focus:ring-0 w-full" readonly="readonly" type="text" value="<%=admin.getEmail()%>"/>
+                            <input name="email" id="email" class="text-sm text-gray-800 bg-white border rounded leading-5 py-2 px-3 border-gray-200 hover:border-gray-300 focus:border-red-300 shadow-sm placeholder-gray-400 focus:ring-0 w-full" readonly="readonly" type="text" value="<%=admins.getEmail()%>"/>
                         </div>
                         <div class="flex-1">
                             <label class="block text-sm font-medium mb-1" for="password">Password <span class="text-red-500">*</span></label>

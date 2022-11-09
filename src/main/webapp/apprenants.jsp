@@ -105,13 +105,13 @@
                                     <span class="px-2 py-1 font-semibold leading-tight text-red-700 bg-red-100 rounded-full white:bg-red-700 white:text-red-100"> Delete </span>
                                 </button>
                             </form>
-                            <form action="ApprenantServlet" method="post">
+                            <a href="updateApprenant.jsp">
                                 <input type="hidden" name="id" value="<%=apprenant.getId()%>"/>
-                                <input type="hidden" name="action" value="update"/>
                                 <button type="submit">
                                     <span class="ml-4 px-2 py-1 font-semibold leading-tight text-green-700 bg-green-100 rounded-full white:bg-green-700 white:text-green-100"> Update </span>
+
                                 </button>
-                            </form>
+                            </a>
                         </td>
                     </tr>
                     </tbody>
