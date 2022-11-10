@@ -3,7 +3,6 @@ package com.example.simpkoala.services;
 import com.example.simpkoala.config.Config;
 import com.example.simpkoala.entity.Apprenant;
 import jakarta.persistence.EntityManager;
-import jakarta.persistence.TypedQuery;
 
 import java.util.List;
 public class ApprenantService {
@@ -77,11 +76,6 @@ public class ApprenantService {
             EntityManager em = Config.getConfig().getEntityManager();
 
             em.getTransaction().begin();
-
-//            TypedQuery<Apprenant> query = em.createQuery("SELECT a FROM Apprenant a", Apprenant.class);
-
-
-//            List<Apprenant> list = query.getResultList();
             List<Apprenant> list = em.createQuery("select a FROM Apprenant a", Apprenant.class).getResultList();
             em.getTransaction().commit();
             return list;

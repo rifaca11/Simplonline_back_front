@@ -19,6 +19,8 @@ public class ApprenantServlet extends HttpServlet {
         List<Apprenant> list = apprenantService.getAll();
         request.setAttribute("data", list);
         request.getRequestDispatcher("apprenants.jsp").forward(request, response);
+
+
     }
 
     @Override
@@ -46,9 +48,8 @@ public class ApprenantServlet extends HttpServlet {
                 response.sendRedirect("ApprenantServlet");
             } else if (request.getParameter("action").equals("update")) {
                 ApprenantService apprenantService = new ApprenantService();
-                PromostoapprenantService promostoapprenantService = new PromostoapprenantService();
 
-                ApprenantEntity updateApprenant = new ApprenantEntity();
+                Apprenant updateApprenant = new Apprenant();
                 updateApprenant.setId(Integer.parseInt(request.getParameter("id")));
                 updateApprenant.setFirstname(request.getParameter("firstname"));
                 updateApprenant.setLastname(request.getParameter("lastname"));
@@ -56,27 +57,16 @@ public class ApprenantServlet extends HttpServlet {
                 updateApprenant.setPassword(request.getParameter("password"));
 
                 apprenantService.update(updateApprenant);
+                List<Apprenant> list = apprenantService.getAll();
+                request.setAttribute("data", list);
+                request.getRequestDispatcher("apprenants.jsp").forward(request, response);
 
-                if (request.getParameter("promo") != null) {
-                    System.out.println(request.getParameter("promo"));
-                    PromostoapprenantEntity promostoapprenant = promostoapprenantService.findByApprenantId(updateApprenant.getId());
-
-                    if (promostoapprenant == null) {
-                        PromostoapprenantEntity newPromotoapprenant = new PromostoapprenantEntity();
-                        newPromotoapprenant.setApprenantId(updateApprenant.getId());
-                        newPromotoapprenant.setPromoId(Integer.parseInt(request.getParameter("promo")));
-                        promostoapprenantService.add(newPromotoapprenant);
-                    } else {
-                        if (promostoapprenant.getApprenantId() != updateApprenant.getId()) {
-                            PromostoapprenantEntity updatePromotoapprenant = new PromostoapprenantEntity();
-                            updatePromotoapprenant.setApprenantId(updateApprenant.getId());
-                            updatePromotoapprenant.setPromoId(Integer.parseInt(request.getParameter("promo")));
-                            promostoapprenantService.update(updatePromotoapprenant);
-                        }
-
-                    }
-
-                }
+            }
+            else if(request.getParameter("action").equals("get")){
+                ApprenantService apprenantService = new ApprenantService();
+                Apprenant selectedApprenant = apprenantService.findById(Integer.parseInt(request.getParameter("id")));
+                request.setAttribute("selectedApprenant", selectedApprenant);
+                request.getRequestDispatcher("updateApprenant.jsp").forward(request, response);
             }
 
 

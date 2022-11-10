@@ -7,7 +7,7 @@
 <%--<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>--%>
 <html>
 <head>
-    <title>Title</title
+    <title>Title</title>
 </head>
 <body>
 
@@ -105,13 +105,13 @@
                                     <span class="px-2 py-1 font-semibold leading-tight text-red-700 bg-red-100 rounded-full white:bg-red-700 white:text-red-100"> Delete </span>
                                 </button>
                             </form>
-                            <a href="updateApprenant.jsp">
+                            <form action="ApprenantServlet" method="post">
                                 <input type="hidden" name="id" value="<%=apprenant.getId()%>"/>
+                                <input type="hidden" name="action" value="get"/>
                                 <button type="submit">
                                     <span class="ml-4 px-2 py-1 font-semibold leading-tight text-green-700 bg-green-100 rounded-full white:bg-green-700 white:text-green-100"> Update </span>
-
                                 </button>
-                            </a>
+                            </form>
                         </td>
                     </tr>
                     </tbody>

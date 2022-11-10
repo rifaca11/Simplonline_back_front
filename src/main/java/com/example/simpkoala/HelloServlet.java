@@ -2,30 +2,22 @@ package com.example.simpkoala;
 
 
 import java.io.*;
-import java.util.List;
 
-import com.example.simpkoala.entity.Apprenant;
-import com.example.simpkoala.services.ApprenantService;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.*;
 import jakarta.servlet.annotation.*;
 
-import javax.sql.rowset.serial.SerialException;
 
 @WebServlet(name = "helloServlet", value = "/hello-servlet")
 public class HelloServlet extends HttpServlet {
     private String message;
 
     public void init() {
-        message = "Hello World!";
+//        message = "Hello World!";
     }
 
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
-//        ApprenantService apprenantService = new ApprenantService();
-//        List<Apprenant> list = apprenantService.getAll(10);
-
-        //request.setAttribute("apprenants",list);
-        //request.getRequestDispatcher("apprenants.jsp").forward(request,response);
+        response.sendRedirect("LoginServlet");
     }
 
     public void destroy() {
