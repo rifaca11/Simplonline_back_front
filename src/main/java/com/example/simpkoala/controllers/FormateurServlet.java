@@ -1,7 +1,9 @@
 package com.example.simpkoala.controllers;
 
 import com.example.simpkoala.entity.Formateur;
+import com.example.simpkoala.entity.Formateur;
 
+import com.example.simpkoala.services.FormateurService;
 import com.example.simpkoala.services.FormateurService;
 import jakarta.servlet.*;
 import jakarta.servlet.http.*;
@@ -44,7 +46,30 @@ public class FormateurServlet extends HttpServlet {
                 FormateurService formateurService = new FormateurService();
                 formateurService.deleteByID(Integer.parseInt(request.getParameter("id")));
                 response.sendRedirect("FormateurServlet");
+            }else if (request.getParameter("action").equals("update")) {
+                FormateurService formateurService = new FormateurService();
+
+                Formateur updateFormateur = new Formateur();
+                updateFormateur.setId(Integer.parseInt(request.getParameter("id")));
+                updateFormateur.setFirstname(request.getParameter("firstname"));
+                updateFormateur.setLastname(request.getParameter("lastname"));
+                updateFormateur.setEmail(request.getParameter("email"));
+                updateFormateur.setPassword(request.getParameter("password"));
+
+                formateurService.update(updateFormateur);
+                List<Formateur> list = formateurService.getAll();
+                request.setAttribute("data", list);
+                request.getRequestDispatcher("formateur.jsp").forward(request, response);
+
             }
+            else if(request.getParameter("action").equals("get")){
+                FormateurService formateurService = new FormateurService();
+                Formateur selectedFormateur = formateurService.findById(Integer.parseInt(request.getParameter("id")));
+                request.setAttribute("selectedFormateur", selectedFormateur);
+                request.getRequestDispatcher("updateFormateur.jsp").forward(request, response);
+            }
+
+
 
         }
 

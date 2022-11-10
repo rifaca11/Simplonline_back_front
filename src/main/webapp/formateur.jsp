@@ -82,7 +82,7 @@
                             </form>
                             <form action="FormateurServlet" method="post">
                                 <input type="hidden" name="id" value="<%=formateur.getId()%>"/>
-                                <input type="hidden" name="action" value="update"/>
+                                <input type="hidden" name="action" value="get"/>
                                 <button type="submit">
                                     <span class="ml-4 px-2 py-1 font-semibold leading-tight text-green-700 bg-green-100 rounded-full white:bg-green-700 white:text-green-100"> Update </span>
                                 </button>

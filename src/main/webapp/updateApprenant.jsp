@@ -19,7 +19,7 @@
 
     <!-- Card body -->
     <div class="bg-white px-8 pb-6 rounded-b shadow-lg">
-        <h2 class="text-2xl font-semibold leading-tight py-2 mb-6">Add your student </h2>
+        <h2 class="text-2xl font-semibold leading-tight py-2 mb-6">Update your student </h2>
 
         <!-- Card form -->
         <div>
