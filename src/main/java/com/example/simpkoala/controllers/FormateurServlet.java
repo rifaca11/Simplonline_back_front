@@ -3,14 +3,18 @@ package com.example.simpkoala.controllers;
 import com.example.simpkoala.entity.Formateur;
 import com.example.simpkoala.entity.Formateur;
 
+import com.example.simpkoala.entity.Promos;
 import com.example.simpkoala.services.FormateurService;
 import com.example.simpkoala.services.FormateurService;
+import com.example.simpkoala.services.PromosService;
 import jakarta.servlet.*;
 import jakarta.servlet.http.*;
 import jakarta.servlet.annotation.*;
 
 import java.io.IOException;
 import java.util.List;
+
+import static java.lang.System.out;
 
 @WebServlet(name = "FormateurServlet", value = "/FormateurServlet")
 public class FormateurServlet extends HttpServlet {
@@ -57,16 +61,21 @@ public class FormateurServlet extends HttpServlet {
                 updateFormateur.setPassword(request.getParameter("password"));
 
                 formateurService.update(updateFormateur);
-                List<Formateur> list = formateurService.getAll();
-                request.setAttribute("data", list);
-                request.getRequestDispatcher("formateur.jsp").forward(request, response);
+
+
 
             }
             else if(request.getParameter("action").equals("get")){
-                FormateurService formateurService = new FormateurService();
-                Formateur selectedFormateur = formateurService.findById(Integer.parseInt(request.getParameter("id")));
-                request.setAttribute("selectedFormateur", selectedFormateur);
-                request.getRequestDispatcher("updateFormateur.jsp").forward(request, response);
+                if(request.getParameter("id") != null) {
+                    FormateurService formateurService = new FormateurService();
+
+
+                    Formateur selectedFormateur = formateurService.findById(Integer.parseInt(request.getParameter("id")));
+
+                    request.setAttribute("selectedFormateur", selectedFormateur);
+
+                    request.getRequestDispatcher("updateFormateur.jsp").forward(request, response);
+                }
             }
 
 

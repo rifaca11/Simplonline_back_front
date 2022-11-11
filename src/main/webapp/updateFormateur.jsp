@@ -26,6 +26,7 @@
         <div>
             <%
                 Formateur selectedFormateur = (Formateur) request.getAttribute("selectedFormateur");
+
             %>
             <form action="FormateurServlet" method="post">
 
@@ -49,6 +50,7 @@
                             <label class="block text-sm font-medium mb-1" for="password">Password <span class="text-red-500">*</span></label>
                             <input name="password" type="password" id="password" class="text-sm text-gray-800 bg-white border rounded leading-5 py-2 px-3 border-gray-200 hover:border-gray-300 focus:border-red-300 shadow-sm placeholder-gray-400 focus:ring-0 w-full" type="text" placeholder="*******" />
                         </div>
+
                     </div>
 
                 </div>
