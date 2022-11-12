@@ -1,11 +1,17 @@
 package com.example.simpkoala.controllers;
 
 import com.example.simpkoala.entity.Apprenant;
+import com.example.simpkoala.entity.Formateur;
+import com.example.simpkoala.entity.Promos;
+import com.example.simpkoala.entity.Promostoapprenant;
 import com.example.simpkoala.services.ApprenantService;
+import com.example.simpkoala.services.PromosService;
+import com.example.simpkoala.services.PromostoapprenantService;
 import jakarta.servlet.*;
 import jakarta.servlet.http.*;
 import jakarta.servlet.annotation.*;
 
+import javax.swing.*;
 import java.io.IOException;
 import java.util.List;
 
@@ -19,7 +25,6 @@ public class ApprenantServlet extends HttpServlet {
         List<Apprenant> list = apprenantService.getAll();
         request.setAttribute("data", list);
         request.getRequestDispatcher("apprenants.jsp").forward(request, response);
-
 
     }
 
@@ -56,6 +61,33 @@ public class ApprenantServlet extends HttpServlet {
                 updateApprenant.setEmail(request.getParameter("email"));
                 updateApprenant.setPassword(request.getParameter("password"));
 
+
+
+                PromostoapprenantService promostoapprenantService = new PromostoapprenantService();
+                int promoId = Integer.parseInt(request.getParameter("promoId"));
+                if(promoId != 0) {
+                    Promostoapprenant promostoapprenant = promostoapprenantService.findById(promoId);
+                    if (promostoapprenant != null) {
+                        int oldPromotoapprenantId = promostoapprenant.getPromoId();
+//                        if (oldPromotoapprenantId != ) {
+                            Promostoapprenant promoByApprenant = promostoapprenantService.findById(updateApprenant.getId());
+                            if (promoByApprenant != null) {
+//                                promoByApprenant.setPromoId(null);
+                                promostoapprenantService.update(promoByApprenant);
+                            }
+
+//                        }
+                    }
+
+                }
+
+
+
+
+
+
+
+
                 apprenantService.update(updateApprenant);
                 List<Apprenant> list = apprenantService.getAll();
                 request.setAttribute("data", list);
@@ -64,7 +96,11 @@ public class ApprenantServlet extends HttpServlet {
             }
             else if(request.getParameter("action").equals("get")){
                 ApprenantService apprenantService = new ApprenantService();
+                PromosService promosService = new PromosService();
                 Apprenant selectedApprenant = apprenantService.findById(Integer.parseInt(request.getParameter("id")));
+                List<Promos> nullPromos = promosService.getAllNulls();
+
+                request.setAttribute("nullPromos", nullPromos);
                 request.setAttribute("selectedApprenant", selectedApprenant);
                 request.getRequestDispatcher("updateApprenant.jsp").forward(request, response);
             }

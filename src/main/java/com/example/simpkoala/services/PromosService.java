@@ -1,6 +1,7 @@
 package com.example.simpkoala.services;
 
 import com.example.simpkoala.config.Config;
+import com.example.simpkoala.entity.Formateur;
 import com.example.simpkoala.entity.Promos;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.TypedQuery;
@@ -93,6 +94,20 @@ public class PromosService {
             em.getTransaction().commit();
             return list;
         } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+        return null;
+    }
+
+    public List<Promos> getAllNulls() {
+        try {
+            EntityManager em = Config.getConfig().getEntityManager();
+            em.getTransaction().begin();
+            TypedQuery<Promos> query = (TypedQuery<Promos>) em.createQuery("select P from Promos P where P.id not in (select P.id from Promostoapprenant PA,Apprenant A,Promos P where PA.apprenantId=A.id and PA.promoId=P.id)");
+            List<Promos> formateurList = query.getResultList();
+            em.getTransaction().commit();
+            return formateurList;
+        } catch(Exception e) {
             System.out.println(e.getMessage());
         }
         return null;

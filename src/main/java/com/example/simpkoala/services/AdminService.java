@@ -2,6 +2,7 @@ package com.example.simpkoala.services;
 
 import com.example.simpkoala.config.Config;
 import com.example.simpkoala.entity.Admin;
+import com.example.simpkoala.entity.Apprenant;
 import jakarta.persistence.EntityManager;
 
 import java.util.List;
@@ -41,6 +42,58 @@ public class AdminService {
             System.out.println(e.getMessage());
         }
         return null;
+    }
+
+    public int countApprenant() {
+        try {
+            EntityManager em = Config.getConfig().getEntityManager();
+            em.getTransaction().begin();
+            int count = em.createQuery("SELECT COUNT(b) FROM Apprenant b", Long.class).getSingleResult().intValue();
+            em.getTransaction().commit();
+            return count;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return 0;
+        }
+    }
+
+    public int countBrief() {
+        try {
+            EntityManager em = Config.getConfig().getEntityManager();
+            em.getTransaction().begin();
+            int count = em.createQuery("SELECT COUNT(b) FROM Brief b", Long.class).getSingleResult().intValue();
+            em.getTransaction().commit();
+            return count;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return 0;
+        }
+    }
+
+    public int countPromo() {
+        try {
+            EntityManager em = Config.getConfig().getEntityManager();
+            em.getTransaction().begin();
+            int count = em.createQuery("SELECT COUNT(b) FROM Promos b", Long.class).getSingleResult().intValue();
+            em.getTransaction().commit();
+            return count;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return 0;
+        }
+    }
+
+    public int countFormateur() {
+        try {
+            EntityManager em = Config.getConfig().getEntityManager();
+            em.getTransaction().begin();
+            int count = em.createQuery("SELECT COUNT(b) FROM Formateur b", Long.class).getSingleResult().intValue();
+            em.getTransaction().commit();
+            return count;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return 0;
+        }
     }
 
 }
