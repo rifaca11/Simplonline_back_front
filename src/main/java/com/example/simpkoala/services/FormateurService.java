@@ -1,8 +1,10 @@
 package com.example.simpkoala.services;
 
 import com.example.simpkoala.config.Config;
+import com.example.simpkoala.entity.Admin;
 import com.example.simpkoala.entity.Formateur;
 import com.example.simpkoala.entity.Promos;
+import com.example.simpkoala.utils.HashPassword;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.TypedQuery;
 
@@ -21,6 +23,38 @@ public class FormateurService {
             System.out.println(e.getMessage());
         }
         return false;
+    }
+
+    public boolean login(String email, String password) {
+        try {
+            EntityManager em = Config.getConfig().getEntityManager();
+            TypedQuery<Formateur> query = em.createQuery("SELECT a FROM Formateur a WHERE a.email = :email", Formateur.class);
+            query.setParameter("email", email);
+            Formateur formateur = query.getSingleResult();
+            if (formateur != null) {
+                return HashPassword.check(password, formateur.getPassword());
+            }
+            return false;
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            return false;
+        }
+    }
+
+
+
+
+    public Formateur getFormateurByEmail(String email) {
+        try {
+            EntityManager em = Config.getConfig().getEntityManager();
+            TypedQuery<Formateur> query = em.createQuery("SELECT a FROM Formateur a WHERE a.email = :email", Formateur.class);
+            query.setParameter("email", email);
+            Formateur formateur = query.getSingleResult();
+            return formateur;
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            return null;
+        }
     }
 
     public Formateur findById(int id)

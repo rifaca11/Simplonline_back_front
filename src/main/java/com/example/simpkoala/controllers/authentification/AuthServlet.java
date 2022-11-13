@@ -1,0 +1,85 @@
+package com.example.simpkoala.controllers.authentification;
+
+import com.example.simpkoala.entity.Admin;
+import com.example.simpkoala.services.AdminService;
+import com.example.simpkoala.services.FormateurService;
+import jakarta.servlet.*;
+import jakarta.servlet.http.*;
+import jakarta.servlet.annotation.*;
+
+import java.io.IOException;
+
+@WebServlet({"/", "/login", "/logout"})
+public class AuthServlet extends HttpServlet {
+    @Override
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+        String path = request.getServletPath();
+        switch (path) {
+            case "/":
+                response.sendRedirect(request.getContextPath() + "/login");
+                break;
+            case "/login":
+                // if session is not null, redirect to home
+                if (request.getSession().getAttribute("admin") != null) {
+                    response.sendRedirect("/admin");
+                } else if(request.getSession().getAttribute("formateur") != null) {
+                    response.sendRedirect("/formateur");
+                } else {
+                    request.getRequestDispatcher("auth/login.jsp").forward(request, response);
+                }
+                break;
+            case "/Logout":
+                request.getSession().invalidate();
+                response.sendRedirect(request.getContextPath() + "/login");
+                break;
+        }
+
+    }
+
+    @Override
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+        String path = request.getServletPath();
+        switch (path) {
+            case "/login" -> {
+                String role = request.getParameter("roleType");
+                String email = request.getParameter("email");
+                String password = request.getParameter("password");
+                if(role == null) {
+                    request.setAttribute("email", email);
+                    request.setAttribute("password", password);
+                    request.getRequestDispatcher("auth/login.jsp").forward(request, response);
+                } else {
+                    switch (role) {
+                        case "admin" -> {
+                            AdminService adminService = new AdminService();
+                            if (adminService.login(email, password)) {
+                                Admin admin = adminService.getAdminByEmail(email);
+                                HttpSession session = request.getSession();
+                                session.setAttribute("admin", admin);
+                                response.sendRedirect("/admin");
+                            } else {
+                                request.setAttribute("email", email);
+                                request.setAttribute("password", password);
+                                request.setAttribute("role", role);
+                                request.getRequestDispatcher("auth/login.jsp").forward(request, response);
+                            }
+                        }
+
+
+                    }
+                }
+            }
+            case "/logout" -> {
+                HttpSession session = request.getSession();
+                session.invalidate();
+                response.sendRedirect("/login");
+            }
+        }
+
+
+
+
+    }
+}

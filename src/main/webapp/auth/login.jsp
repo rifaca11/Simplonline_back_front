@@ -1,10 +1,13 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: youcode
-  Date: 11/3/2022
-  Time: 11:26 PM
-  To change this template use File | Settings | File Templates.
---%>
+
+
+
+<%--&lt;%&ndash;--%>
+<%--  Created by IntelliJ IDEA.--%>
+<%--  User: youcode--%>
+<%--  Date: 11/3/2022--%>
+<%--  Time: 11:26 PM--%>
+<%--  To change this template use File | Settings | File Templates.--%>
+<%--&ndash;%&gt;--%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
@@ -12,6 +15,8 @@
   <script src="https://cdn.tailwindcss.com"></script>
 </head>
 <body>
+
+
 <!-- component -->
 <style>
   /*remove custom style*/
@@ -124,6 +129,21 @@
 
   }
 </style>
+
+<%
+  String email = "";
+  String password = "";
+  String role = "";
+  if(request.getAttribute("email") != null) {
+    email = (String) request.getAttribute("email");
+  }
+  if(request.getAttribute("role") != null) {
+    role = (String) request.getAttribute("role");
+  }
+  if(request.getAttribute("password") != null) {
+    password = (String) request.getAttribute("password");
+  }
+%>
 <div class="relative min-h-screen flex ">
   <div class="flex flex-col sm:flex-row items-center md:items-start sm:justify-center md:justify-start flex-auto min-w-0 bg-white">
     <div class="sm:w-1/2 xl:w-3/5 h-full hidden md:flex flex-auto items-center justify-center p-10 overflow-hidden bg-purple-900 text-white bg-no-repeat bg-cover relative"
@@ -153,11 +173,53 @@
           <p class="mt-2 text-sm text-gray-500">Simplonline
             La plateforme collaborative d'apprentissage en pédagogie active</p>
         </div>
-        <div class="flex items-center justify-center space-x-2">
-          <span class="h-px w-16 bg-gray-200"></span>
-          <span class="h-px w-16 bg-gray-200"></span>
-        </div>
-        <form class="mt-8 space-y-6" action="#" method="POST">
+
+        <form class="mt-8 space-y-6" action="/login" method="POST">
+<div class="mt-8">
+  <label class="text-base font-medium text-gray-900">Select your Role</label>
+  <p class="text-sm leading-5 text-gray-500">please select the role to login with</p>
+  <fieldset class="mt-4">
+    <legend class="sr-only">Roles</legend>
+    <div class="space-y-4 sm:flex sm:items-center sm:space-y-0 sm:space-x-10">
+      <div class="flex items-center">
+        <%
+          if(role.equals("admin")) {
+        %>
+        <input id="admin" value="admin" name="roleType" type="radio" checked class="focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300">
+        <% } else { %>
+        <input id="admin" value="admin" name="roleType" type="radio" class="focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300">
+        <% } %>
+        <label for="admin" class="ml-3 block text-sm font-medium text-gray-700"> Admin </label>
+      </div>
+
+      <div class="flex items-center">
+        <%
+          if(role.equals("formateur")) {
+        %>
+        <input id="formateur" value="formateur" name="roleType" type="radio" checked class="focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300">
+        <% } else { %>
+        <input id="formateur" value="formateur" name="roleType" type="radio" class="focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300">
+        <% } %>
+        <label for="formateur" class="ml-3 block text-sm font-medium text-gray-700"> Formateur </label>
+      </div>
+
+      <div class="flex items-center">
+        <%
+          if(role.equals("apprenant")) {
+        %>
+        <input id="apprenant" value="apprenant" name="roleType" type="radio" checked class="focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300">
+        <% } else { %>
+        <input id="apprenant" value="apprenant" name="roleType" type="radio" class="focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300">
+        <% } %>
+        <label for="apprenant" class="ml-3 block text-sm font-medium text-gray-700"> Apprenant </label>
+      </div>
+    </div>
+  </fieldset>
+</div>
+          <div class="flex items-center justify-center space-x-2">
+            <span class="h-px w-16 bg-gray-200"></span>
+          </div>
+
           <input type="hidden" name="remember" value="true">
           <div class="relative">
             <div class="absolute right-3 mt-4"><svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-green-500"
@@ -169,7 +231,7 @@
             <label class="ml-3 text-sm font-bold text-gray-700 tracking-wide">Email</label>
             <input
                     class=" w-full text-base px-4 py-2 border-b border-gray-300 focus:outline-none rounded-2xl focus:border-red-500"
-                    type="" placeholder="mail@gmail.com" value="mail@gmail.com">
+                    type="" placeholder="mail@gmail.com" name="email" value="<%=email%>">
           </div>
           <div class="mt-8 content-center">
             <label class="ml-3 text-sm font-bold text-gray-700 tracking-wide">
@@ -177,7 +239,7 @@
             </label>
             <input
                     class="w-full content-center text-base px-4 py-2 border-b rounded-2xl border-gray-300 focus:outline-none focus:border-red-500"
-                    type="" placeholder="Enter your password" value="*****|">
+                    type="password" placeholder="Enter your password" name="password" value="<%=password%>">
           </div>
           <div>
             <button type="submit"

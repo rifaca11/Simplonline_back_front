@@ -1,4 +1,4 @@
-<%--
+<%@ page import="com.example.simpkoala.entity.Admin" %><%--
   Created by IntelliJ IDEA.
   User: youcode
   Date: 11/3/2022
@@ -14,6 +14,12 @@
 <jsp:include page="sidebar.jsp"/>
 
 <!-- Statistics Cards -->
+
+                                <%
+                                    Admin admin = (Admin) request.getSession().getAttribute("admin");
+                                %>
+<h1 class="ml-4 p-2">Welcome Back <span class="text-red-700 text-xl"> <%= " "+admin.getFirstname()+" "+ admin.getLastname()%> </span></h1>
+
 <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 p-4 gap-4">
     <div class="bg-red-500 white:bg-gray-800 shadow-lg rounded-md flex items-center justify-between p-3 border-b-4 border-red-600 white:border-gray-600 text-white font-medium group">
         <div class="flex justify-center items-center w-14 h-14 bg-white rounded-full transition-all duration-300 transform group-hover:rotate-12">
