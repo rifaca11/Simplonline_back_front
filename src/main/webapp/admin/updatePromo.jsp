@@ -27,7 +27,7 @@
                 Promos selectedPromo = (Promos) request.getAttribute("selectedPromo");
                 List<Formateur> nullFormateur =(List<Formateur>) request.getAttribute("nullFormateur");
             %>
-            <form action="PromoServlet" method="post">
+            <form action="/admin/updateP" method="post">
                  <div class="space-y-4">
                         <!-- infos -->
                         <div>

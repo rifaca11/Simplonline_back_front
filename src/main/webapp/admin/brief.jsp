@@ -84,7 +84,7 @@
                         </td>
 
                         <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm flex ">
-                            <form action="BriefServlet" method="post">
+                            <form action="/admin/deleteBrief" method="post">
                                 <input type="hidden" name="id" value="<%=brief.getId()%>"/>
                                 <input type="hidden" name="action" value="delete"/>
                                 <button type="submit">

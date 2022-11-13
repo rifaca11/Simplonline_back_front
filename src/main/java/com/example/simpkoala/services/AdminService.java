@@ -72,7 +72,19 @@ public class AdminService {
             return null;
         }
     }
+    public Admin findById(int id)
+    {
+        try{
 
+            EntityManager em = Config.getConfig().getEntityManager();
+            return em.find(Admin.class, id);
+        }catch(Exception e)
+        {
+            System.out.println(e.getMessage());
+        }
+
+        return null;
+    }
 
 
 

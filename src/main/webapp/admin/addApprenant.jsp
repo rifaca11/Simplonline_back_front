@@ -23,7 +23,7 @@
 
                     <!-- Card form -->
                     <div x-show="card">
-                        <form action="ApprenantServlet" method="post">
+                        <form action="/admin/addApprenant" method="post">
                         <div class="space-y-4">
                             <!-- infos -->
                             <div>

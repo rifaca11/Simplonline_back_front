@@ -1,5 +1,5 @@
 <component name="ArtifactManager">
-  <artifact type="war" name="simpKoala:war">
+  <artifact type="war" build-on-make="true" name="simpKoala:war">
     <output-path>$PROJECT_DIR$/target</output-path>
     <properties id="maven-jee-properties">
       <options>

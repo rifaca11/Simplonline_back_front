@@ -23,7 +23,7 @@
 
         <!-- Card form -->
         <div x-show="card">
-            <form action="FormateurServlet" method="post">
+            <form action="/admin/addFormateur" method="post">
                 <div class="space-y-4">
                     <!-- infos -->
                     <div>
@@ -50,7 +50,7 @@
                 <!-- Form footer -->
                 <div class="mt-6">
                     <div class="mb-4">
-                        <input type="hidden" name="action" value="add">
+                        <input type="hidden" name="action" value="addFormateur">
                         <button class="font-medium text-sm inline-flex items-center justify-center px-3 py-2 border border-transparent rounded leading-5 shadow-sm transition duration-150 ease-in-out bg-red-700 hover:bg-red-600 text-white focus:outline-none focus-visible:ring-2">create</button>
                     </div>
                 </div>

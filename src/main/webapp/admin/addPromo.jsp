@@ -4,11 +4,10 @@
 <%@ page import="java.util.stream.Collectors" %>
 
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<html>
+
 <head>
     <title>Add promo</title>
 </head>
-<body>
 
 
 <jsp:include page="sidebar.jsp"/>
@@ -23,7 +22,7 @@
 
         <!-- Card form -->
         <div x-show="card">
-            <form action="PromoServlet" method="post">
+            <form action="/admin/addPromo" method="post">
             <div class="space-y-4">
                 <!-- infos -->
                 <div>
@@ -39,6 +38,7 @@
                     <button class="font-medium text-sm inline-flex items-center justify-center px-3 py-2 border border-transparent rounded leading-5 shadow-sm transition duration-150 ease-in-out bg-red-700 hover:bg-red-600 text-white focus:outline-none focus-visible:ring-2">create</button>
                 </div>
             </div>
+            </form>
         </div>
         </div>
 

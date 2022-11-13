@@ -32,7 +32,7 @@
             <h2 class="text-2xl font-semibold leading-tight mb-6">Promos</h2>
         </div>
         <div class="flex flex-row-reverse">
-            <button class="bg-gradient-to-r from-red-600 to-red-600 hover:bg-gradient-to-l hover:from-red-500 hover:to-red-600 text-gray-100 p-2 rounded"><a href="addPromo.jsp">Add Promo</a></button>
+            <button class="bg-gradient-to-r from-red-600 to-red-600 hover:bg-gradient-to-l hover:from-red-500 hover:to-red-600 text-gray-100 p-2 rounded"><a href="/admin/addPromo">Add Promo</a></button>
         </div>
 
         <div class="my-2 flex sm:flex-row flex-col">
@@ -79,14 +79,14 @@
                                     <%=promos.getFormateurByFormateurId() != null ? promos.getFormateurByFormateurId().getFirstname() : "null"%>                        </td>
 
                         <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm flex ">
-                            <form action="PromoServlet" method="post">
+                            <form action="/admin/deletePromo" method="post">
                                 <input type="hidden" name="id" value="<%=promos.getId()%>"/>
                                 <input type="hidden" name="action" value="delete"/>
                                 <button type="submit">
                                     <span class="px-2 py-1 font-semibold leading-tight text-red-700 bg-red-100 rounded-full white:bg-red-700 white:text-red-100"> Delete </span>
                                 </button>
                             </form>
-                            <form action="PromoServlet" method="post">
+                            <form action="/admin/getPromo" method="get">
                                 <input type="hidden" name="id" value="<%=promos.getId()%>"/>
                                 <input type="hidden" name="action" value="get"/>
                                 <button type="submit">
