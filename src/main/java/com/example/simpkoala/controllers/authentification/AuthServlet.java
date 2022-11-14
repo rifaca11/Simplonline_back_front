@@ -1,6 +1,7 @@
 package com.example.simpkoala.controllers.authentification;
 
 import com.example.simpkoala.entity.Admin;
+import com.example.simpkoala.entity.Formateur;
 import com.example.simpkoala.services.AdminService;
 import com.example.simpkoala.services.FormateurService;
 import jakarta.servlet.*;
@@ -29,7 +30,7 @@ public class AuthServlet extends HttpServlet {
                     request.getRequestDispatcher("auth/login.jsp").forward(request, response);
                 }
                 break;
-            case "/Logout":
+            case "/logout":
                 request.getSession().invalidate();
                 response.sendRedirect(request.getContextPath() + "/login");
                 break;
@@ -59,6 +60,20 @@ public class AuthServlet extends HttpServlet {
                                 HttpSession session = request.getSession();
                                 session.setAttribute("admin", admin);
                                 response.sendRedirect("/admin");
+                            } else {
+                                request.setAttribute("email", email);
+                                request.setAttribute("password", password);
+                                request.setAttribute("role", role);
+                                request.getRequestDispatcher("auth/login.jsp").forward(request, response);
+                            }
+                        }
+                        case "formateur" -> {
+                            FormateurService formateurService = new FormateurService();
+                            if (formateurService.login(email, password)) {
+                                Formateur formateur = formateurService.getFormateurByEmail(email);
+                                HttpSession session = request.getSession();
+                                session.setAttribute("ormateur", formateur);
+                                response.sendRedirect("/formateur");
                             } else {
                                 request.setAttribute("email", email);
                                 request.setAttribute("password", password);
