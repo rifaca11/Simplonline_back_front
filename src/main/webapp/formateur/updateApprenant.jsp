@@ -28,7 +28,7 @@
 //                Promos selectedPromos = (Promos) request.getAttribute("selectedPromos");
                 List<Promos> nullPromos =(List<Promos>) request.getAttribute("nullPromos");
             %>
-            <form action="/admin/updateA" method="post">
+            <form action="/formateur/updateApprenant" method="post">
 
                 <div class="space-y-4">
                     <!-- infos -->

@@ -84,9 +84,20 @@
                         </td>
 
                         <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm flex ">
-                            <form action="/admin/deleteBrief" method="post">
+                            <form action="/formateur/deleteBrief" method="post">
                                 <input type="hidden" name="id" value="<%=brief.getId()%>"/>
                                 <input type="hidden" name="action" value="delete"/>
+                                <button type="submit">
+                                    <span class="px-2 py-1 font-semibold leading-tight text-red-700 bg-red-100 rounded-full white:bg-red-700 white:text-red-100"> Delete </span>
+                                </button>
+                            </form>
+
+                        </td>
+
+                        <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm flex ">
+                            <form action="/formateur/getBrief" method="get">
+                                <input type="hidden" name="id" value="<%=brief.getId()%>"/>
+                                <input type="hidden" name="action" value="get"/>
                                 <button type="submit">
                                     <span class="px-2 py-1 font-semibold leading-tight text-red-700 bg-red-100 rounded-full white:bg-red-700 white:text-red-100"> Delete </span>
                                 </button>

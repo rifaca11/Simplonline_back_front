@@ -15,9 +15,9 @@
 
 <!-- Statistics Cards -->
 
-                                <%
-                                    Admin admin = (Admin) request.getSession().getAttribute("admin");
-                                %>
+        <%
+            Admin admin = (Admin) request.getSession().getAttribute("admin");
+        %>
 <h1 class="ml-4 p-2">Welcome Back <span class="text-red-700 text-xl"> <%= " "+admin.getFirstname()+" "+ admin.getLastname()%> </span></h1>
 
 <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 p-4 gap-4">

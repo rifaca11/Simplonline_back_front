@@ -37,6 +37,7 @@ public class AdminServlet extends HttpServlet {
             case "/admin/formateurs" -> {
                 FormateurService formateurService = new FormateurService();
                 List<Formateur> formateurList = formateurService.getAll();
+
                 request.setAttribute("data", formateurList);
                 request.getRequestDispatcher("formateur.jsp").forward(request, response);
             }
@@ -172,7 +173,7 @@ public class AdminServlet extends HttpServlet {
 //                Update Formateur
                 case "/admin/update" -> {
                     if (request.getParameter("action").equals("updateFormateur")) {
-                        out.println("here");
+//                        out.println("here");
                         FormateurService formateurService = new FormateurService();
                         Formateur updateFormateur = new Formateur();
                         updateFormateur.setId(Integer.parseInt(request.getParameter("id")));

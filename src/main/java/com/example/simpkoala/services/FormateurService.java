@@ -1,10 +1,7 @@
 package com.example.simpkoala.services;
 
 import com.example.simpkoala.config.Config;
-import com.example.simpkoala.entity.Admin;
-import com.example.simpkoala.entity.Brief;
-import com.example.simpkoala.entity.Formateur;
-import com.example.simpkoala.entity.Promos;
+import com.example.simpkoala.entity.*;
 import com.example.simpkoala.utils.HashPassword;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.TypedQuery;
@@ -101,7 +98,7 @@ public class FormateurService {
             return true;
         }catch(Exception e)
         {
-            System.out.println(e.getMessage());
+            e.getStackTrace();
         }
         return false;
     }
@@ -144,13 +141,13 @@ public class FormateurService {
     }
 
 
-    public List<Formateur> getMyBrief(int formateurId) {
+    public List<Formateur> getMyBrief() {
         try {
             EntityManager em = Config.getConfig().getEntityManager();
             em.getTransaction().begin();
 
-            TypedQuery<Formateur> query = (TypedQuery<Formateur>) em.createQuery("select a from Brief a,Promos b where a.promoId =b.id and b.formateurId= :formateurId ");
-            query.setParameter("formateurId",formateurId);
+            TypedQuery<Formateur> query = (TypedQuery<Formateur>) em.createQuery("select a from Formateur a");
+//            query.setParameter("formateurId",formateurId);
             List<Formateur> formateurList = query.getResultList();
             em.getTransaction().commit();
             return formateurList;

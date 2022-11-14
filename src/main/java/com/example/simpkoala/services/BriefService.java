@@ -83,7 +83,6 @@ public class BriefService {
             //query.setParameter("limit",limit);
 
             List<Brief> list = query.getResultList();
-            //List<Brief> list = em.createQuery("select a FROM Brief a", Brief.class).getResultList();
             em.getTransaction().commit();
             return list;
         }catch(Exception e)

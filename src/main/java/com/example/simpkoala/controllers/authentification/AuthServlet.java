@@ -72,7 +72,7 @@ public class AuthServlet extends HttpServlet {
                             if (formateurService.login(email, password)) {
                                 Formateur formateur = formateurService.getFormateurByEmail(email);
                                 HttpSession session = request.getSession();
-                                session.setAttribute("ormateur", formateur);
+                                session.setAttribute("formateur", formateur);
                                 response.sendRedirect("/formateur");
                             } else {
                                 request.setAttribute("email", email);
