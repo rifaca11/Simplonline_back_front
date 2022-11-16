@@ -12,104 +12,21 @@
 <html>
 <head>
     <title>Promo</title>
-    <%--    <form action="AdminServlet" method="post">--%>
-    <%--        <label for="name">--%>
-    <%--            <input type="text" name="name" id="name">--%>
-    <%--        </label>--%>
-    <%--            <label for="FormateurID">--%>
-    <%--                <input type="text" name="formateurId" id="formateurId">--%>
-    <%--                </label>--%>
-    <%--            <input type="hidden" name="action" value="addPromo">--%>
-    <%--            <button type="submit"> Add Promo </button>--%>
-    <%--    </form>--%>
+
 </head>
 <body>
-<jsp:include page="sidebar.jsp"/>
+<jsp:include page="home.jsp"/>
 <!-- Brief Table -->
 
 
 <div class="container mx-auto px-4 sm:px-8">
-    <div class="py-8">
-        <div>
-            <h2 class="text-2xl font-semibold leading-tight mb-6">Briefs</h2>
+    <a href="#" class="flex flex-col items-center bg-white border rounded-lg shadow-md md:flex-row md:max-w-xl hover:bg-gray-100 dark:border-gray-700 dark:bg-gray-800 dark:hover:bg-gray-700">
+        <img class="object-cover w-full rounded-t-lg h-96 md:h-auto md:w-48 md:rounded-none md:rounded-l-lg" src="/docs/images/blog/image-4.jpg" alt="">
+        <div class="flex flex-col justify-between p-4 leading-normal">
+            <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">Noteworthy technology acquisitions 2021</h5>
+            <p class="mb-3 font-normal text-gray-700 dark:text-gray-400">Here are the biggest enterprise technology acquisitions of 2021 so far, in reverse chronological order.</p>
         </div>
-
-        <div class="my-2 flex sm:flex-row flex-col">
-
-        </div>
-        <div class="-mx-4 sm:-mx-8 px-4 sm:px-8 py-4 overflow-x-auto">
-            <div class="inline-block min-w-full shadow rounded-lg overflow-hidden">
-                <table class="min-w-full leading-normal">
-                    <thead>
-                    <tr>
-                        <th
-                                class="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
-                            Description
-                        </th>
-                        <th
-                                class="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
-                            Brief
-                        </th>
-                        <th
-                                class="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
-                            Promo
-                        </th>
-                        <th
-                                class="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
-                            Actions
-                        </th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <% List<Brief> briefList = (List<Brief>) request.getAttribute("data");
-                        for(Brief brief : briefList) {
-                    %>
-                    <tr>
-                        <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
-                            <div class="flex items-center">
-
-                                <div class="ml-3">
-                                    <p class="text-gray-900 whitespace-no-wrap">
-                                        <%=brief.getDescription()%>
-                                    </p>
-                                </div>
-                            </div>
-                        </td>
-                        <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
-                            <p class="text-gray-900 whitespace-no-wrap"><%=brief.getName()%></p>
-                        </td>
-                        <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
-                            <p class="text-gray-900 whitespace-no-wrap">
-                                <%=brief.getPromosByPromoId().getName()%>    </p>
-                        </td>
-
-                        <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm flex ">
-                            <form action="/formateur/deleteBrief" method="post">
-                                <input type="hidden" name="id" value="<%=brief.getId()%>"/>
-                                <input type="hidden" name="action" value="delete"/>
-                                <button type="submit">
-                                    <span class="px-2 py-1 font-semibold leading-tight text-red-700 bg-red-100 rounded-full white:bg-red-700 white:text-red-100"> Delete </span>
-                                </button>
-                            </form>
-                            <form action="/formateur/getBrief" method="get">
-                                <input type="hidden" name="id" value="<%=brief.getId()%>"/>
-                                <input type="hidden" name="action" value="get"/>
-                                <button type="submit">
-                                    <span class="ml-4 px-2 py-1 font-semibold leading-tight text-green-700 bg-green-100 rounded-full white:bg-green-700 white:text-green-100"> Update </span>
-                                </button>
-                            </form>
-
-                        </td>
-
-
-                    </tr>
-                    </tbody>
-                    <% } %>
-                </table>
-
-            </div>
-        </div>
-    </div>
+    </a>
 </div>
 
 

@@ -7,7 +7,7 @@ import jakarta.servlet.annotation.*;
 
 import java.io.IOException;
 
-@WebServlet({"/apprenant"})
+@WebServlet({"/apprenant","/apprenant/Briefs"})
 public class ApprenantServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -16,6 +16,8 @@ public class ApprenantServlet extends HttpServlet {
         switch (path) {
 //            Display Home
             case "/apprenant" -> request.getRequestDispatcher("apprenant/home.jsp").forward(request, response);
+            case "/apprenant/Briefs" -> request.getRequestDispatcher("apprenant/listBrief.jsp").forward(request, response);
+
         }
     }
 
