@@ -11,9 +11,14 @@ public class BriefService {
     {
         try{
             EntityManager em = Config.getConfig().getEntityManager();
+            System.out.println("BriefService.add");
             em.getTransaction().begin();
+            System.out.println("BriefService.add2");
             em.persist(brief);
+            System.out.println("BriefService.add3");
             em.getTransaction().commit();
+            System.out.println("BriefService.add4");
+
             return true;
         }catch(Exception e)
         {
@@ -81,6 +86,25 @@ public class BriefService {
             //        query.setParameter("email",email);
             TypedQuery<Brief> query = em.createQuery("SELECT a FROM Brief a", Brief.class);
             //query.setParameter("limit",limit);
+
+            List<Brief> list = query.getResultList();
+            em.getTransaction().commit();
+            return list;
+        }catch(Exception e)
+        {
+            System.out.println(e.getMessage());
+        }
+        return null;
+    }
+
+    public List<Brief> getMyBrief(int id)
+    {
+        try{
+
+            EntityManager em = Config.getConfig().getEntityManager();
+
+            em.getTransaction().begin();
+            TypedQuery<Brief> query = (TypedQuery<Brief>) em.createQuery("SELECT a FROM Brief a where a.promosByPromoId in(select b.id from Promos b where b.formateurId = : id)");
 
             List<Brief> list = query.getResultList();
             em.getTransaction().commit();

@@ -23,9 +23,11 @@
 
     <!-- Card form -->
     <div x-show="card">
-      <form action="/formateur/newBrief" method="post">
+      <form action="/formateur/addBrief" method="post">
         <div class="space-y-4">
-
+          <div class="flex flex-row-reverse">
+            <button class="bg-gradient-to-r from-red-600 to-red-600 hover:bg-gradient-to-l hover:from-red-500 hover:to-red-600 text-gray-100 p-2 rounded"><a href="/formateur/addBrief">Add Brief</a></button>
+          </div>
           <!-- infos -->
           <div>
             <label class="block text-sm font-medium mb-1" for="description">Description <span class="text-red-500">*</span></label>

@@ -12,7 +12,7 @@ public class Brief {
     @Basic
     @Column(name = "description")
     private String description;
-    @ManyToOne
+    @ManyToOne()
     @JoinColumn(name = "promoId", referencedColumnName = "id", nullable = false)
     private Promos promosByPromoId;
 

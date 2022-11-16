@@ -2,7 +2,10 @@ package com.example.simpkoala.services;
 
 import com.example.simpkoala.config.Config;
 import com.example.simpkoala.entity.Apprenant;
+import com.example.simpkoala.entity.Formateur;
+import com.example.simpkoala.utils.HashPassword;
 import jakarta.persistence.EntityManager;
+import jakarta.persistence.TypedQuery;
 
 import java.util.List;
 public class ApprenantService {
@@ -20,6 +23,38 @@ public class ApprenantService {
         }
         return false;
     }
+
+    public Apprenant getApprenantByEmail(String email) {
+        try {
+            EntityManager em = Config.getConfig().getEntityManager();
+            TypedQuery<Apprenant> query = em.createQuery("SELECT a FROM Apprenant a WHERE a.email = :email", Apprenant.class);
+            query.setParameter("email", email);
+            Apprenant apprenant = query.getSingleResult();
+            return apprenant;
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            return null;
+        }
+    }
+
+    public boolean login(String email, String password) {
+        try {
+            EntityManager em = Config.getConfig().getEntityManager();
+            TypedQuery<Apprenant> query = em.createQuery("SELECT a FROM Apprenant a WHERE a.email = :email", Apprenant.class);
+            query.setParameter("email", email);
+            Apprenant apprenant = query.getSingleResult();
+            if (apprenant != null) {
+                return HashPassword.check(password, apprenant.getPassword());
+            }
+            return false;
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            return false;
+        }
+    }
+
+
+
 
     public Apprenant findById(int id)
     {

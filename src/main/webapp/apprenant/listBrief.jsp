@@ -1,8 +1,7 @@
 <%@ page import="com.example.simpkoala.entity.Promos" %>
 <%@ page import="java.util.List" %>
 <%@ page import="com.example.simpkoala.entity.Formateur" %>
-<%@ page import="com.example.simpkoala.entity.Brief" %>
-<%@ page import="com.example.simpkoala.services.BriefService" %><%--
+<%@ page import="com.example.simpkoala.entity.Brief" %><%--
   Created by IntelliJ IDEA.
   User: youcode
   Date: 11/2/2022
@@ -27,21 +26,12 @@
 <body>
 <jsp:include page="sidebar.jsp"/>
 <!-- Brief Table -->
-<%--<% int idF = (int) session.getAttribute("id");--%>
-<%--    BriefService briefService =new BriefService();--%>
-<%--    List<Brief> briefs = briefService.getMyBrief(idF);--%>
-<%--    for(Brief brief : briefs )--%>
-<%--    {--%>
-<%--%>--%>
-<%--<p><% brief.getDescription(); %></p>--%>
-<%--<% } %>--%>
+
+
 <div class="container mx-auto px-4 sm:px-8">
     <div class="py-8">
         <div>
             <h2 class="text-2xl font-semibold leading-tight mb-6">Briefs</h2>
-        </div>
-        <div class="flex flex-row-reverse">
-            <button class="bg-gradient-to-r from-red-600 to-red-600 hover:bg-gradient-to-l hover:from-red-500 hover:to-red-600 text-gray-100 p-2 rounded"><a href="/formateur/addBrief">Add Brief</a></button>
         </div>
 
         <div class="my-2 flex sm:flex-row flex-col">

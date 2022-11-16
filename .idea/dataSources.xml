@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="DataSourceManagerImpl" format="xml" multifile-model="true">
-    <data-source source="LOCAL" name="koalasimp@172.21.165.48" uuid="ed010473-46c0-419a-93b8-613021bf7318">
+    <data-source source="LOCAL" name="koalasimp@172.21.171.128" uuid="ed010473-46c0-419a-93b8-613021bf7318">
       <driver-ref>mysql.8</driver-ref>
       <synchronize>true</synchronize>
       <jdbc-driver>com.mysql.cj.jdbc.Driver</jdbc-driver>
-      <jdbc-url>jdbc:mysql://172.21.165.48:3306/koalasimp</jdbc-url>
+      <jdbc-url>jdbc:mysql://172.21.171.128:3306/koalasimp</jdbc-url>
       <working-dir>$ProjectFileDir$</working-dir>
     </data-source>
     <data-source source="LOCAL" name="default/Hibernate" uuid="bf1a74ee-6eff-4f7f-a0ed-2be23f4b5fdd">
