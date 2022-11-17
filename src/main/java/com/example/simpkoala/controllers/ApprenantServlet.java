@@ -1,11 +1,14 @@
 package com.example.simpkoala.controllers;
 
+import com.example.simpkoala.entity.Brief;
 import com.example.simpkoala.services.ApprenantService;
+import com.example.simpkoala.services.BriefService;
 import jakarta.servlet.*;
 import jakarta.servlet.http.*;
 import jakarta.servlet.annotation.*;
 
 import java.io.IOException;
+import java.util.List;
 
 @WebServlet({"/apprenant","/apprenant/Briefs"})
 public class ApprenantServlet extends HttpServlet {
@@ -16,8 +19,15 @@ public class ApprenantServlet extends HttpServlet {
         switch (path) {
 //            Display Home
             case "/apprenant" -> request.getRequestDispatcher("apprenant/home.jsp").forward(request, response);
-            case "/apprenant/Briefs" -> request.getRequestDispatcher("apprenant/listBrief.jsp").forward(request, response);
-
+//            Display My Briefs
+            case "/apprenant/Briefs" -> {
+            BriefService briefService = new BriefService();
+//            HttpSession session = request.getSession();
+//            int idA = (Integer) session.getAttribute("idA");
+            List<Brief> list = briefService.getAll();
+            request.setAttribute("data", list);
+            request.getRequestDispatcher("listBrief.jsp").forward(request, response);
+        }
         }
     }
 

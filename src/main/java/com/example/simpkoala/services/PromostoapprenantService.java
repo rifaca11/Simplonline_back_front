@@ -1,10 +1,13 @@
 package com.example.simpkoala.services;
 
 import com.example.simpkoala.config.Config;
+import com.example.simpkoala.entity.Apprenant;
+import com.example.simpkoala.entity.Promos;
 import com.example.simpkoala.entity.Promostoapprenant;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.TypedQuery;
 
+import java.util.ArrayList;
 import java.util.List;
 public class PromostoapprenantService {
     public boolean add(Promostoapprenant promostoapprenant)
@@ -38,16 +41,19 @@ public class PromostoapprenantService {
 
     public boolean update(Promostoapprenant promostoapprenant)
     {
+            EntityManager em = Config.getConfig().getEntityManager();
         try{
 
-            EntityManager em = Config.getConfig().getEntityManager();
             em.getTransaction().begin();
             em.merge(promostoapprenant);
             em.getTransaction().commit();
             return true;
         }catch(Exception e)
         {
+            System.out.println("error");
             System.out.println(e.getMessage());
+        }finally {
+            em.close();
         }
         return false;
     }
@@ -92,5 +98,53 @@ public class PromostoapprenantService {
         }
         return null;
     }
+
+    public static List<Promostoapprenant> FindPromoAppById(int id)
+    {
+        EntityManager em = Config.getConfig().getEntityManager();
+        try{
+            em.getTransaction().begin();
+
+            TypedQuery<Promostoapprenant> query = em.createQuery("SELECT a FROM Promostoapprenant a where a.promoId = :id", Promostoapprenant.class);
+            query.setParameter("id",id);
+
+            List<Promostoapprenant> list = query.getResultList();
+            //List<Promostoapprenant> list = em.createQuery("select a FROM Promostoapprenant a", Promostoapprenant.class).getResultList();
+            em.getTransaction().commit();
+            return list;
+        }catch(Exception e)
+        {
+            System.out.println(e.getMessage());
+        }finally {
+            em.close();
+        }
+        return null;
+    }
+
+
+
+    public  Promostoapprenant FindPromoAppByIdA(int idA)
+    {
+        EntityManager em = Config.getConfig().getEntityManager();
+        try{
+            em.getTransaction().begin();
+
+            TypedQuery<Promostoapprenant> query = em.createQuery("SELECT a FROM Promostoapprenant a where a.apprenantId = :id", Promostoapprenant.class);
+            query.setParameter("id",idA);
+
+            Promostoapprenant promostoapprenant = query.getSingleResult();
+            //List<Promostoapprenant> list = em.createQuery("select a FROM Promostoapprenant a", Promostoapprenant.class).getResultList();
+            em.getTransaction().commit();
+            return promostoapprenant;
+        }catch(Exception e)
+        {
+            System.out.println(e.getMessage());
+        }finally {
+            em.close();
+        }
+        return null;
+    }
+
+
 
 }

@@ -121,4 +121,38 @@ public class ApprenantService {
         return null;
     }
 
+    public List<Apprenant> getApprenantWithPromos()
+    {
+        try{
+
+            EntityManager em = Config.getConfig().getEntityManager();
+
+            em.getTransaction().begin();
+            List<Apprenant> list = em.createQuery("select a FROM Apprenant a, Promostoapprenant b WHERE a.id=b.apprenantId", Apprenant.class).getResultList();
+            em.getTransaction().commit();
+            return list;
+        }catch(Exception e)
+        {
+            System.out.println(e.getMessage());
+        }
+        return null;
+    }
+
+    public List<Apprenant> getApprenantWithOutPromos()
+    {
+        try{
+
+            EntityManager em = Config.getConfig().getEntityManager();
+
+            em.getTransaction().begin();
+            List<Apprenant> list = em.createQuery("SELECT a FROM Apprenant a WHERE a.id NOT IN (SELECT p.apprenantId FROM Promostoapprenant p)", Apprenant.class).getResultList();
+            em.getTransaction().commit();
+            return list;
+        }catch(Exception e)
+        {
+            System.out.println(e.getMessage());
+        }
+        return null;
+    }
+
 }

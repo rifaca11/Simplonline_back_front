@@ -13,7 +13,7 @@ public class Brief {
     @Column(name = "description")
     private String description;
     @ManyToOne()
-    @JoinColumn(name = "promoId", referencedColumnName = "id", nullable = false)
+    @JoinColumn(name = "promoId", referencedColumnName = "id", nullable = true)
     private Promos promosByPromoId;
 
     public int getId() {

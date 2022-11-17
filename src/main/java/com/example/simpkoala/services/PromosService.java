@@ -1,6 +1,7 @@
 package com.example.simpkoala.services;
 
 import com.example.simpkoala.config.Config;
+import com.example.simpkoala.entity.Promos;
 import com.example.simpkoala.entity.Formateur;
 import com.example.simpkoala.entity.Promos;
 import jakarta.persistence.EntityManager;
@@ -109,6 +110,29 @@ public class PromosService {
             return formateurList;
         } catch(Exception e) {
             System.out.println(e.getMessage());
+        }
+        return null;
+    }
+
+    public static List<Promos> getPromosByIdF(int idF)
+    {
+        EntityManager em = Config.getConfig().getEntityManager();
+        try{
+
+
+            em.getTransaction().begin();
+
+            TypedQuery<Promos> query = (TypedQuery<Promos>) em.createQuery("SELECT a FROM Promos a where a.formateurByFormateurId.id = :idF");
+
+            query.setParameter("idF", idF);
+            List<Promos> list = query.getResultList();
+            em.getTransaction().commit();
+            return list;
+        }catch(Exception e)
+        {
+            System.out.println(e.getMessage());
+        }finally {
+            em.close();
         }
         return null;
     }

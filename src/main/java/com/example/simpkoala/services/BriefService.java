@@ -9,20 +9,23 @@ import java.util.List;
 public class BriefService {
     public boolean add(Brief brief)
     {
-        try{
             EntityManager em = Config.getConfig().getEntityManager();
-            System.out.println("BriefService.add");
+        try{
+//            System.out.println("BriefService.add");
             em.getTransaction().begin();
-            System.out.println("BriefService.add2");
+//            System.out.println("BriefService.add2");
             em.persist(brief);
-            System.out.println("BriefService.add3");
+//            System.out.println("BriefService.add3");
             em.getTransaction().commit();
-            System.out.println("BriefService.add4");
+//            System.out.println("BriefService.add4");
 
             return true;
         }catch(Exception e)
         {
+            System.out.println("error");
             System.out.println(e.getMessage());
+        }finally {
+            em.close();
         }
         return false;
     }
@@ -97,21 +100,49 @@ public class BriefService {
         return null;
     }
 
-    public List<Brief> getMyBrief(int id)
+    public List<Brief> getMyBrief(int idF)
     {
+            EntityManager em = Config.getConfig().getEntityManager();
         try{
 
-            EntityManager em = Config.getConfig().getEntityManager();
 
             em.getTransaction().begin();
-            TypedQuery<Brief> query = (TypedQuery<Brief>) em.createQuery("SELECT a FROM Brief a where a.promosByPromoId in(select b.id from Promos b where b.formateurId = : id)");
 
+           TypedQuery<Brief> query = (TypedQuery<Brief>) em.createQuery("SELECT a FROM Brief a where a.promosByPromoId.formateurId = :idF");
+
+            query.setParameter("idF", idF);
             List<Brief> list = query.getResultList();
             em.getTransaction().commit();
             return list;
         }catch(Exception e)
         {
             System.out.println(e.getMessage());
+        }finally {
+            em.close();
+        }
+        return null;
+    }
+
+
+    public List<Brief> getMyBriefA(int idA)
+    {
+        EntityManager em = Config.getConfig().getEntityManager();
+        try{
+
+
+            em.getTransaction().begin();
+
+            TypedQuery<Brief> query = (TypedQuery<Brief>) em.createQuery("SELECT a FROM Brief a where a.promosByPromoId.apprenantsPerPromo = :idA");
+
+            query.setParameter("idA", idA);
+            List<Brief> list = query.getResultList();
+            em.getTransaction().commit();
+            return list;
+        }catch(Exception e)
+        {
+            System.out.println(e.getMessage());
+        }finally {
+            em.close();
         }
         return null;
     }

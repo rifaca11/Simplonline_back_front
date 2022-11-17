@@ -18,11 +18,12 @@
 
     <!-- component -->
     <section class="bg-white dark:bg-gray-900">
+
         <div class="container px-6 py-24 mx-auto">
             <h1 class="text-3xl font-semibold text-gray-800 capitalize lg:text-4xl dark:text-white">bienvenue sur Simplonline</h1>
 
             <div class="mt-8 lg:-mx-6 lg:flex lg:items-center">
-                <img class="object-cover w-full lg:mx-6 lg:w-1/2 rounded-xl h-72 lg:h-96" src="https://images.unsplash.com/photo-1590283603385-17ffb3a7f29f?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80"alt="">
+                <img class="object-cover w-full lg:mx-6 lg:w-1/2 rounded-xl h-72 lg:h-96" src="https://upload.wikimedia.org/wikipedia/commons/d/d1/Brendan_Eich_Mozilla_Foundation_official_photo.jpg" alt="">
 
                 <div class="mt-6 lg:w-1/2 lg:mt-0 lg:mx-6 ">
                     <p class="text-sm text-blue-500 uppercase">YouCode Safi 2022 Brendan Eich</p>

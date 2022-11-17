@@ -1,41 +1,48 @@
-<%@ page import="com.example.simpkoala.entity.Promos" %>
+<%@ page import="com.example.simpkoala.entity.Apprenant" %>
 <%@ page import="java.util.List" %>
-<%@ page import="com.example.simpkoala.entity.Formateur" %>
-<%@ page import="com.example.simpkoala.entity.Brief" %>
-<%@ page import="com.example.simpkoala.services.BriefService" %><%--
-  Created by IntelliJ IDEA.
-  User: youcode
-  Date: 11/2/2022
-  Time: 2:09 PM
-  To change this template use File | Settings | File Templates.
---%>
+<%@ page import="com.example.simpkoala.entity.Promos" %>
+<%@ page import="java.util.stream.Collectors" %>
+
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%--<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>--%>
 <html>
 <head>
-    <title>Promo</title>
-    <%--    <form action="AdminServlet" method="post">--%>
-    <%--        <label for="name">--%>
-    <%--            <input type="text" name="name" id="name">--%>
-    <%--        </label>--%>
-    <%--            <label for="FormateurID">--%>
-    <%--                <input type="text" name="formateurId" id="formateurId">--%>
-    <%--                </label>--%>
-    <%--            <input type="hidden" name="action" value="addPromo">--%>
-    <%--            <button type="submit"> Add Promo </button>--%>
-    <%--    </form>--%>
+    <title>Title</title>
 </head>
 <body>
+
+
+
+
+
+
+<%--<form action="ApprenantServlet" method="post">--%>
+<%--    <label for="firstname">first name</label>--%>
+<%--    <input type="text" name="firstname" id="firstname">--%>
+
+<%--    <label for="lastname">last name</label>--%>
+<%--    <input type="text" name="lastname" id="lastname">--%>
+
+<%--    <label for="email">email</label>--%>
+<%--    <input type="text" name="email" id="email">--%>
+
+<%--    <label for="password">password</label>--%>
+<%--    <input type="text" name="password" id="password">--%>
+
+<%--    <input type="hidden" name="action" value="add">--%>
+<%--    <button type="submit">Insert</button>--%>
+
+
+<%--</form>--%>
+
 <jsp:include page="sidebar.jsp"/>
-<!-- Brief Table -->
+<!-- Apprenant Table -->
 
 
 <div class="container mx-auto px-4 sm:px-8">
     <div class="py-8">
         <div>
-            <h2 class="text-2xl font-semibold leading-tight mb-6">Briefs</h2>
-        </div>
-        <div class="flex flex-row-reverse">
-            <button class="bg-gradient-to-r from-red-600 to-red-600 hover:bg-gradient-to-l hover:from-red-500 hover:to-red-600 text-gray-100 p-2 rounded"><a href="/formateur/addBrief">Add Brief</a></button>
+            <h2 class="text-2xl font-semibold leading-tight mb-6">Apprenants With Promo</h2>
         </div>
 
         <div class="my-2 flex sm:flex-row flex-col">
@@ -48,11 +55,11 @@
                     <tr>
                         <th
                                 class="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
-                            Description
+                            Apprenant
                         </th>
                         <th
                                 class="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
-                            Brief
+                            Email
                         </th>
                         <th
                                 class="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
@@ -65,44 +72,32 @@
                     </tr>
                     </thead>
                     <tbody>
-<%--                    <% List<Brief> briefList = (List<Brief>) request.getAttribute("data");--%>
-<%--                        for(Brief brief : briefList) {--%>
-<%--                    %>--%>
-<% int idF = (int) session.getAttribute("id");
-    BriefService briefService =new BriefService();
-    List<Brief> briefs = briefService.getMyBrief(idF);
-    for(Brief brief : briefs )
-    {
-%>
+                    <% List<Apprenant> apprenantList = (List<Apprenant>) request.getAttribute("data");
+                        for(Apprenant apprenant : apprenantList) {
+                    %>
                     <tr>
                         <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
                             <div class="flex items-center">
 
                                 <div class="ml-3">
                                     <p class="text-gray-900 whitespace-no-wrap">
-                                        <%=brief.getDescription()%>
+                                        <%=apprenant.getFirstname()+" "+apprenant.getLastname()%>
                                     </p>
                                 </div>
                             </div>
                         </td>
                         <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
-                            <p class="text-gray-900 whitespace-no-wrap"><%=brief.getName()%></p>
+                            <p class="text-gray-900 whitespace-no-wrap"><%=apprenant.getEmail()%></p>
                         </td>
                         <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
                             <p class="text-gray-900 whitespace-no-wrap">
-                                <%=brief.getPromosByPromoId().getName()%>    </p>
+                                <%=apprenant.getPromosByPromoId()!= null ? String.join(", ", apprenant.getPromosByPromoId().stream().map(Promos::getName).toList()) : "null"%>
+                            </p>
                         </td>
 
                         <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm flex ">
-                            <form action="/formateur/deleteBrief" method="post">
-                                <input type="hidden" name="id" value="<%=brief.getId()%>"/>
-                                <input type="hidden" name="action" value="delete"/>
-                                <button type="submit">
-                                    <span class="px-2 py-1 font-semibold leading-tight text-red-700 bg-red-100 rounded-full white:bg-red-700 white:text-red-100"> Delete </span>
-                                </button>
-                            </form>
-                            <form action="/formateur/getBrief" method="get">
-                                <input type="hidden" name="id" value="<%=brief.getId()%>"/>
+                            <form action="/formateur/getApprenant" method="get">
+                                <input type="hidden" name="id" value="<%=apprenant.getId()%>"/>
                                 <input type="hidden" name="action" value="get"/>
                                 <button type="submit">
                                     <span class="ml-4 px-2 py-1 font-semibold leading-tight text-green-700 bg-green-100 rounded-full white:bg-green-700 white:text-green-100"> Update </span>
@@ -110,8 +105,6 @@
                             </form>
 
                         </td>
-
-
                     </tr>
                     </tbody>
                     <% } %>
@@ -122,8 +115,7 @@
     </div>
 </div>
 
-
-<!-- ./Brief Table -->
+<!-- ./Apprenant Table -->
 <jsp:include page="footer.jsp"/>
 </body>
 </html>

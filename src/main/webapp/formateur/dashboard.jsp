@@ -18,7 +18,7 @@
             <%
                 Formateur formateur = (Formateur) request.getSession().getAttribute("formateur"); %>
 <%--            %>--%>
-<h1 class="ml-4 p-2">Welcome Back <span class="text-red-700 text-xl">
+<h1 class="ml-4 mt-4 p-2 text-xl">Welcome Back <span class="ml-2 text-red-700">
 <%= " "+formateur.getFirstname()+" "+ formateur.getLastname()%> </span></h1>
 
 <div class="grid grid-cols-1 sm:grid-cols-1 lg:grid-cols-3 p-4 gap-4">

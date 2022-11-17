@@ -26,7 +26,7 @@
             <%
                 Apprenant selectedApprenant = (Apprenant) request.getAttribute("selectedApprenant");
 //                Promos selectedPromos = (Promos) request.getAttribute("selectedPromos");
-                List<Promos> nullPromos =(List<Promos>) request.getAttribute("nullPromos");
+//                List<Promos> nullPromos =(List<Promos>) request.getAttribute("nullPromos");
             %>
             <form action="/formateur/updateApprenant" method="post">
 
@@ -50,17 +50,17 @@
                             <label class="block text-sm font-medium mb-1" for="password">Password <span class="text-red-500">*</span></label>
                             <input name="password" type="password" id="password" class="text-sm text-gray-800 bg-white border rounded leading-5 py-2 px-3 border-gray-200 hover:border-gray-300 focus:border-red-300 shadow-sm placeholder-gray-400 focus:ring-0 w-full" type="text" value="<%=selectedApprenant.getPassword()%>"/>
                         </div>
-                        <div class="flex-1">
-                            <label class="block text-sm font-medium mb-1">AssignTo</label>
-                            <select name="promoId" class="text-sm text-gray-800 bg-white border rounded leading-5 py-2 px-3 border-gray-200 hover:border-gray-300 focus:border-red-300 shadow-sm placeholder-gray-400 focus:ring-0 w-full">
-                                <option selected value="<%= selectedApprenant.getId()%>"> <%=selectedApprenant.getPromosByPromoId()!= null ? String.join(", ", selectedApprenant.getPromosByPromoId().stream().map(Promos::getName).toList()) : "null"%> </option>
-                                <%
-                                    for (Promos promos: nullPromos){
-                                %>
-                                <option value="<%=promos.getId() %>"><%=promos.getName() %> </option>
-                                <%}%>
-                            </select>
-                        </div>
+<%--                        <div class="flex-1">--%>
+<%--                            <label class="block text-sm font-medium mb-1">AssignTo</label>--%>
+<%--                            <select name="promoId" class="text-sm text-gray-800 bg-white border rounded leading-5 py-2 px-3 border-gray-200 hover:border-gray-300 focus:border-red-300 shadow-sm placeholder-gray-400 focus:ring-0 w-full">--%>
+<%--                                <option selected value="<%= selectedApprenant.getId()%>"> <%=selectedApprenant.getPromosByPromoId()!= null ? String.join(", ", selectedApprenant.getPromosByPromoId().stream().map(Promos::getName).toList()) : "null"%> </option>--%>
+<%--                                <%--%>
+<%--                                    for (Promos promos: nullPromos){--%>
+<%--                                %>--%>
+<%--                                <option value="<%=promos.getId() %>"><%=promos.getName() %> </option>--%>
+<%--                                <%}%>--%>
+<%--                            </select>--%>
+<%--                        </div>--%>
                     </div>
 
                 </div>

@@ -96,11 +96,11 @@
                         </td>
 
                         <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm flex ">
-                            <form action="/formateur/getApprenant" method="get">
+                            <form action="/formateur/getApprenantPromo" method="get">
                                 <input type="hidden" name="id" value="<%=apprenant.getId()%>"/>
-                                <input type="hidden" name="action" value="get"/>
+                                <input type="hidden" name="action" value="getPromo"/>
                                 <button type="submit">
-                                    <span class="ml-4 px-2 py-1 font-semibold leading-tight text-green-700 bg-green-100 rounded-full white:bg-green-700 white:text-green-100"> Update </span>
+                                    <span class="ml-4 px-2 py-1 font-semibold leading-tight text-green-700 bg-green-100 rounded-full white:bg-green-700 white:text-green-100"> Assign </span>
                                 </button>
                             </form>
                         </td>

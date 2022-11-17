@@ -7,9 +7,11 @@ import jakarta.servlet.*;
 import jakarta.servlet.http.*;
 import jakarta.servlet.annotation.*;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
-@WebServlet({"/formateur","/formateur/briefs","/formateur/newBrief","/formateur/addBrief","/formateur/deleteBrief","/formateur/getBrief","/formateur/updateBrief","/formateur/promos","/formateur/apprenants","/formateur/getApprenant","/formateur/updateApprenant","/formateur/updateProfile"})
+@WebServlet({"/formateur","/formateur/briefs","/formateur/apprenantWithoutPromo","/formateur/getApprenantPromo","/formateur/assignApprenantPromo","/formateur/newBrief","/formateur/addBrief","/formateur/deleteBrief","/formateur/getBrief","/formateur/updateBrief","/formateur/promos","/formateur/apprenants","/formateur/getApprenant","/formateur/updateApprenant","/formateur/updateProfile"})
 public class FormateurServlet extends HttpServlet {
     HttpSession session;
     @Override
@@ -47,9 +49,20 @@ public class FormateurServlet extends HttpServlet {
                     request.setAttribute("selectedBrief", selectedBrief);
                     request.getRequestDispatcher("updateBrief.jsp").forward(request, response);
                 }
+
+//                Display promo by apprenant ID
+                case "/formateur/getApprenantPromo" ->{
+                    ApprenantService apprenantService = new ApprenantService();
+                    PromosService promosService = new PromosService();
+                    Apprenant selectedApprenant = apprenantService.findById(Integer.parseInt(request.getParameter("id")));
+                    List<Promos> nullPromos = promosService.getAll();
+
+                    request.setAttribute("nullPromos", nullPromos);
+                    request.setAttribute("selectedApprenant", selectedApprenant);
+                    request.getRequestDispatcher("assignApprenant.jsp").forward(request,response);
+                }
 //            Display Add Promo
                 case "/formateur/addBrief" -> request.getRequestDispatcher("addBrief.jsp").forward(request, response);
-
 
 //            Display All Promos
                 case "/formateur/promos" -> {
@@ -59,10 +72,18 @@ public class FormateurServlet extends HttpServlet {
                     request.getRequestDispatcher("listpromo.jsp").forward(request, response);
                 }
 
-//            Display All Apprenants
+//            Display All Apprenants With Promos
                 case "/formateur/apprenants" -> {
                     ApprenantService apprenantService = new ApprenantService();
-                    List<Apprenant> list = apprenantService.getAll();
+                    List<Apprenant> list = apprenantService.getApprenantWithPromos();
+                    request.setAttribute("data", list);
+                    request.getRequestDispatcher("apprenantsWithPromo.jsp").forward(request, response);
+                }
+
+//                Display All Apprenants Without Promos
+                case "/formateur/apprenantWithoutPromo" -> {
+                    ApprenantService apprenantService = new ApprenantService();
+                    List<Apprenant> list = apprenantService.getApprenantWithOutPromos();
                     request.setAttribute("data", list);
                     request.getRequestDispatcher("listApprenant.jsp").forward(request, response);
                 }
@@ -72,7 +93,7 @@ public class FormateurServlet extends HttpServlet {
                     ApprenantService apprenantService = new ApprenantService();
                     PromosService promosService = new PromosService();
                     Apprenant selectedApprenant = apprenantService.findById(Integer.parseInt(request.getParameter("id")));
-                    List<Promos> nullPromos = promosService.getAllNulls();
+                    List<Promos> nullPromos = promosService.getAll();
 
                     request.setAttribute("nullPromos", nullPromos);
                     request.setAttribute("selectedApprenant", selectedApprenant);
@@ -98,16 +119,23 @@ public class FormateurServlet extends HttpServlet {
                         if (request.getParameter("action").equals("addBrief")) {
                             String description = request.getParameter("description");
                             String name = request.getParameter("name");
-
                             Brief newBrief = new Brief();
                             newBrief.setDescription(description);
                             newBrief.setName(name);
-                            System.out.println(name);
 
+                            HttpSession session1 = request.getSession();
+                            System.out.println("id former");
+                            System.out.println(session1.getAttribute("id"));
+                            List<Promos> promotions = PromosService.getPromosByIdF((Integer)session1.getAttribute("id"));
+                            Promos promo = new Promos();
+                            for (Promos promotion: promotions) {
+                                promo.setId(promotion.getId());
+                                newBrief.setPromosByPromoId(promo);
+                                break;
+                            }
                             BriefService briefService = new BriefService();
-                            briefService.add(newBrief);
-                            if(briefService.add(newBrief)==true){
-                            response.sendRedirect("/formateur/briefs");}
+                            if(briefService.add(newBrief) == true){
+                               response.sendRedirect("/formateur/briefs");}
                             else{
                                 response.sendRedirect("/formateur");
                             }
@@ -131,39 +159,58 @@ public class FormateurServlet extends HttpServlet {
 
                     }
 //                Update Apprenant
-                    case "/admin/updateApprenant" -> {
+                    case "/formateur/updateApprenant" -> {
                         if (request.getParameter("action").equals("update")) {
                             ApprenantService apprenantService = new ApprenantService();
-
-                            Apprenant updateApprenant = new Apprenant();
-                            updateApprenant.setId(Integer.parseInt(request.getParameter("id")));
+                            Apprenant updateApprenant = apprenantService.findById(Integer.parseInt(request.getParameter("id")));
                             updateApprenant.setFirstname(request.getParameter("firstname"));
                             updateApprenant.setLastname(request.getParameter("lastname"));
                             updateApprenant.setEmail(request.getParameter("email"));
                             updateApprenant.setPassword(request.getParameter("password"));
 
-                            PromostoapprenantService promostoapprenantService = new PromostoapprenantService();
-                            int promoId = Integer.parseInt(request.getParameter("promoId"));
-                            if (promoId != 0) {
-                                Promostoapprenant promostoapprenant = promostoapprenantService.findById(promoId);
-                                if (promostoapprenant != null) {
-                                    int oldPromotoapprenantId = promostoapprenant.getPromoId();
-                                    //                        if (oldPromotoapprenantId != ) {
-                                    Promostoapprenant promoByApprenant = promostoapprenantService.findById(updateApprenant.getId());
-                                    if (promoByApprenant != null) {
-                                        //                                promoByApprenant.setPromoId(null);
-                                        promostoapprenantService.update(promoByApprenant);
-                                    }
-//                        }
-                                }
-                            }
+
                             apprenantService.update(updateApprenant);
                             List<Apprenant> list = apprenantService.getAll();
                             request.setAttribute("data", list);
                             response.sendRedirect("/formateur/apprenants");
 
+
+
+//                            Integer promoId = Integer.parseInt(request.getParameter("promoId"));
+//                            if (promoId != null) {
+//                            PromosService promosService= new PromosService();
+//                            Promos updatePromo=promosService.findById(promoId);
+//
+//                            List<Promos> newPromos = new ArrayList<>();
+//                            newPromos.add(updatePromo);
+//                            updateApprenant.setPromosByPromoId(newPromos);
+//
+//                            List<Apprenant> newApprenants = new ArrayList<>(updatePromo.getApprenantsById());
+//                            newApprenants.add(updateApprenant);
+//                            updatePromo.setApprenantsPerPromo(newApprenants);
+
+//                            }
+
+
+//                                promosService.update(updatePromo);
+
+
                         }
                     }
+
+//                    Assign Apprenant To Promo
+                    case "/formateur/assignApprenantPromo" ->{
+
+                        FormateurService formateurService = new FormateurService();
+                        int idApprenant = Integer.parseInt(request.getParameter("id"));
+                        int idPromo = Integer.parseInt(request.getParameter("promoId"));
+                        System.out.println("idApprenant: "+idApprenant + " idPromo: "+idPromo);
+                        formateurService.addApprenantToPromo(idPromo, idApprenant);
+                        response.sendRedirect("/formateur/apprenants");
+                        break;
+                    }
+
+
 
 //                Update Brief
                     case "/formateur/updateBrief" -> {

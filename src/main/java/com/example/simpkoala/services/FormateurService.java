@@ -6,6 +6,7 @@ import com.example.simpkoala.utils.HashPassword;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.TypedQuery;
 
+import java.util.ArrayList;
 import java.util.List;
 public class FormateurService {
     public boolean add(Formateur formateur)
@@ -80,6 +81,23 @@ public class FormateurService {
             return true;
         }catch(Exception e)
         {
+            System.out.println(e.getMessage());
+        }
+        return false;
+    }
+
+    public boolean addApprenantToPromo(int idPromo, int idApprenant) {
+        EntityManager em = Config.getConfig().getEntityManager();
+        try {
+            em.getTransaction().begin();
+            Promos promo = em.find(Promos.class, idPromo);
+            Apprenant apprenant = em.find(Apprenant.class, idApprenant);
+            List<Apprenant> apprenants = new ArrayList<>();
+            apprenants.add(apprenant);
+            promo.setApprenantsPerPromo(apprenants);
+            em.getTransaction().commit();
+            return true;
+        } catch (Exception e) {
             System.out.println(e.getMessage());
         }
         return false;

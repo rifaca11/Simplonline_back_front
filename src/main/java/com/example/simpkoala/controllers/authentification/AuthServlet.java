@@ -89,6 +89,7 @@ public class AuthServlet extends HttpServlet {
                             if (apprenantService.login(email, password)) {
                                 Apprenant apprenant = apprenantService.getApprenantByEmail(email);
                                 HttpSession session = request.getSession();
+                                session.setAttribute("idA",apprenant.getId());
                                 session.setAttribute("apprenant", apprenant);
                                 response.sendRedirect("/apprenant");
                             } else {

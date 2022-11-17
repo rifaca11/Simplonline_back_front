@@ -168,7 +168,7 @@
       <div class="max-w-md w-full space-y-8">
         <div class="text-center">
           <h2 class="mt-6 text-3xl font-bold text-gray-900">
-            Welcom Back
+            Welcome Back
           </h2>
           <p class="mt-2 text-sm text-gray-500">Simplonline
             La plateforme collaborative d'apprentissage en pédagogie active</p>
@@ -176,7 +176,7 @@
 
         <form class="mt-8 space-y-6" action="/login" method="POST">
 <div class="mt-8">
-  <label class="text-base font-medium text-gray-900">Select your Role</label>
+  <label class="text-base font-medium text-gray-900"></label>
   <p class="text-sm leading-5 text-gray-500">please select the role to login with</p>
   <fieldset class="mt-4">
     <legend class="sr-only">Roles</legend>
@@ -222,11 +222,8 @@
 
           <input type="hidden" name="remember" value="true">
           <div class="relative">
-            <div class="absolute right-3 mt-4"><svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-green-500"
-                                                    fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                    d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-            </svg>
+            <div class="absolute right-3 mt-4">
+
             </div>
             <label class="ml-3 text-sm font-bold text-gray-700 tracking-wide">Email</label>
             <input
