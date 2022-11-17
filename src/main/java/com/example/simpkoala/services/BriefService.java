@@ -128,15 +128,12 @@ public class BriefService {
     {
         EntityManager em = Config.getConfig().getEntityManager();
         try{
-
-
             em.getTransaction().begin();
-
-            TypedQuery<Brief> query = (TypedQuery<Brief>) em.createQuery("SELECT a FROM Brief a where a.promosByPromoId.apprenantsPerPromo = :idA");
-
+            TypedQuery<Brief> query = (TypedQuery<Brief>) em.createQuery("SELECT a FROM Brief a,Promostoapprenant b where a.promosByPromoId.id = b.promoId and b.apprenantId = :idA");
             query.setParameter("idA", idA);
             List<Brief> list = query.getResultList();
             em.getTransaction().commit();
+            System.out.println(list.toString());
             return list;
         }catch(Exception e)
         {

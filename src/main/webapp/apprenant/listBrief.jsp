@@ -31,7 +31,7 @@
         <h1 class="text-3xl font-semibold text-gray-800 capitalize lg:text-4xl dark:text-white">My Briefs</h1>
         <% int idA = (int) session.getAttribute("idA");
             BriefService briefService =new BriefService();
-            List<Brief> briefs = briefService.getMyBrief(idA);
+            List<Brief> briefs = briefService.getMyBriefA(idA);
             for(Brief brief : briefs )
             {
         %>
