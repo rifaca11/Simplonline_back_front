@@ -14,20 +14,26 @@ import java.util.List;
 public class ApprenantServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
         ApprenantService apprenantService = new ApprenantService();
-        String path = request.getServletPath();
-        switch (path) {
+        if (request.getSession().getAttribute("apprenant") != null) {
+            String path = request.getServletPath();
+            switch (path) {
 //            Display Home
-            case "/apprenant" -> request.getRequestDispatcher("apprenant/home.jsp").forward(request, response);
+                case "/apprenant" -> request.getRequestDispatcher("apprenant/home.jsp").forward(request, response);
 //            Display My Briefs
-            case "/apprenant/Briefs" -> {
-            BriefService briefService = new BriefService();
+                case "/apprenant/Briefs" -> {
+                    BriefService briefService = new BriefService();
 //            HttpSession session = request.getSession();
 //            int idA = (Integer) session.getAttribute("idA");
-            List<Brief> list = briefService.getAll();
-            request.setAttribute("data", list);
-            request.getRequestDispatcher("listBrief.jsp").forward(request, response);
+                    List<Brief> list = briefService.getAll();
+                    request.setAttribute("data", list);
+                    request.getRequestDispatcher("listBrief.jsp").forward(request, response);
+                }
+            }
         }
+        else {
+            response.sendRedirect(request.getContextPath() + "/login");
         }
     }
 
